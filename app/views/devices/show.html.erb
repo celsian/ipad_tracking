@@ -1,1 +1,6 @@
-<h3>Device: <%= "#{@device.device_type} #{@device.serial_number} #{@device.district_tag}" %></h3>
+<h3>Device: <%= "#{@device.device_type}" %></h3>
+<%= "Serial Number: #{@device.serial_number} District Tag: #{@device.district_tag}" %><br>
+Current Owner: <%= @device.student ? "#{@device.student.first_name} #{@device.student.last_name} #{@device.student.id_number}" : "None" %>
+<br>
+<br>
+<h4>History:</h4>
