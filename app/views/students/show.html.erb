@@ -9,7 +9,7 @@
 <% if @devices_search %>
   <ul>
     <% @devices_search.each do |device| %>
-      <li><%= device.device_type %> | <%= link_to "#{device.serial_number}", device_path(device) %> | <%= device.district_tag %> | <%= link_to "Add Device", associate_path(device, @student), data: { confirm: "Add #{device.serial_number} #{device.district_tag} to user?" } %></li>
+      <li><%= device.device_type %> | <%= link_to "#{device.serial_number}", device_path(device) %> | <%= device.district_tag %> | <%= link_to "Add Device", associate_path(device, student: @student), data: { confirm: "Add #{device.serial_number} #{device.district_tag} to user?" } %></li>
     <% end %>
   </ul>
 <% end %>

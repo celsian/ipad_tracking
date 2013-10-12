@@ -37,7 +37,7 @@ class DevicesController < ApplicationController
 
   def associate
     device = Device.find(params[:id])
-    student = Student.find(params[:format])
+    student = Student.find(params[:student])
 
     if device.student
       redirect_to student, flash: {error: "Device #{device.device_type} #{device.serial_number} #{device.district_tag} already has an owner: #{device.student.id_number}"}
