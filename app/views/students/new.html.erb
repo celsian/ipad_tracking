@@ -1,0 +1,20 @@
+<h1>New Student:</h1>
+<%= form_for @student do |f| %>
+
+<div class="field">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, autofocus: true %>
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+    <%= f.label :id_number %>
+    <%= f.text_field :id_number %>
+</div>
+
+<div id="error_explanation">
+    <% if @student.errors.any? %>
+      <%= render "errors", object: f.object %>
+    <% end %>
+</div>
+
+  <%= f.submit class: 'btn btn-primary'  %>
+<% end %>

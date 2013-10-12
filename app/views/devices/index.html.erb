@@ -1,0 +1,8 @@
+<h1>Device List:</h1>
+<%= link_to "New Device", new_device_path %>
+<br><br>
+<ul>
+<% @devices.each do |device| %>
+  <li><%= link_to "#{device.device_type}", device_path(device) %> - <%= device.serial_number %> - <%= device.district_tag %> <%= link_to "Delete", device, data: { confirm: "Are you sure?" }, method: :delete %></li>
+<% end %>
+</ul>

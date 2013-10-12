@@ -1,0 +1,20 @@
+<h3><%= @student.first_name %> <%= @student.last_name %>: <%= @student.id_number %> </h3>
+
+<%= form_tag student_path, :method => :get, :class => "form-search" do %>
+  <%= text_field_tag :q, '',size: 10 %>
+  <%= submit_tag "Search", class: 'btn btn-mini' %>
+<% end %>
+
+<%= "Results:" %>
+<% if @devices_search %>
+  <ul>
+    <% @devices_search.each do |device| %>
+      <li><%= device.device_type %> | <%= link_to "#{device.serial_number}", device_path(device) %> | <%= device.district_tag %> | <%= link_to "Add Device", associate_path(device, @student), data: { confirm: "Add #{device.serial_number} #{device.district_tag} to user?" } %></li>
+    <% end %>
+  </ul>
+<% end %>
+<H3>Devices:</H3>
+<% @devices.each do |device| %>
+  <li><%= device.device_type %> <%= device.serial_number %> <%= device.district_tag %>
+    <%= link_to "Remove Device", deassociate_path(device), data: { confirm: "Are you sure?" } %></li>
+<% end %>

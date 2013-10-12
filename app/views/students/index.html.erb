@@ -1,0 +1,8 @@
+<h1>Student List:</h1>
+<%= link_to "New Student", new_student_path %>
+<br><br>
+<ul>
+<% @students.each do |student| %>
+  <li><%= link_to "#{student.first_name} #{student.last_name}", student %> - ID: <%= student.id_number %> <%= link_to "Delete", student, data: { confirm: "Are you sure?" }, method: :delete %></li>
+<% end %>
+</ul>
