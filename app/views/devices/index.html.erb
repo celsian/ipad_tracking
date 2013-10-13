@@ -3,6 +3,6 @@
 <br><br>
 <ul>
 <% @devices.each do |device| %>
-  <li><%= link_to "#{device.device_type}", device_path(device) %> - <%= device.serial_number %> - <%= device.district_tag %> <%= link_to "Delete", device, data: { confirm: "Are you sure?" }, method: :delete %></li>
+  <li><%= link_to "#{device.device_type}", device_path(device) %> - <%= device.serial_number %> - <%= device.district_tag %></li>
 <% end %>
 </ul>

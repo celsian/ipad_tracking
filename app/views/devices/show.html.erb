@@ -3,4 +3,7 @@
 Current Owner: <%= @device.student ? "#{@device.student.first_name} #{@device.student.last_name} #{@device.student.id_number}" : "None" %>
 <br>
 <br>
+<%= link_to "Permanently Delete", @device, data: { confirm: "Are you sure you want to permanently delete this device?" }, method: :delete %>
+<br>
+<br>
 <h4>History:</h4>

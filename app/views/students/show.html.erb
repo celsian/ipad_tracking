@@ -5,16 +5,17 @@
   <%= submit_tag "Search", class: 'btn btn-mini' %>
 <% end %>
 
-<%= "Results:" %>
 <% if @devices_search %>
+<%= "Results:" %>
   <ul>
     <% @devices_search.each do |device| %>
       <li><%= device.device_type %> | <%= link_to "#{device.serial_number}", device_path(device) %> | <%= device.district_tag %> | <%= link_to "Add Device", associate_path(device, student: @student), data: { confirm: "Add #{device.serial_number} #{device.district_tag} to user?" } %></li>
     <% end %>
   </ul>
-<% end %>
+<% end %><br><br>
+<%= link_to "Permanently Delete Student", @student, data: { confirm: "Are you sure you want to permanently delete this student?" }, method: :delete %>
 <H3>Devices:</H3>
 <% @devices.each do |device| %>
   <li><%= device.device_type %> <%= device.serial_number %> <%= device.district_tag %>
-    <%= link_to "Remove Device", deassociate_path(device), data: { confirm: "Are you sure?" } %></li>
+    <%= link_to "Remove Device", deassociate_path(device), data: { confirm: "Remove device from user?" } %></li>
 <% end %>
