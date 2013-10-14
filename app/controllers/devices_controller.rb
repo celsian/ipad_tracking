@@ -1,10 +1,23 @@
 class DevicesController < ApplicationController
   def index
     @devices = Device.all
+
+    @device_search = Device.new
+    if params[:q]
+      @devices = Device.search params[:q]
+    end
   end
 
   def show
     @device = Device.find(params[:id])
+    @history = @device.notes
+
+    @student_search = Student.new
+    if params[:q]
+      @students_search = Student.search params[:q]
+    end
+
+    @note = Note.new
   end
 
   def new
@@ -16,6 +29,7 @@ class DevicesController < ApplicationController
     @device.serial_number.upcase!
 
     if @device.save #If it can save, redirects to movie path, otherwise renders new page again (and errors are displayed)
+      Note.create(device: @device, note: "Device #{@device.serial_number} was added to inventory.")
       redirect_to devices_path, flash: {success: "Device was created."}
     else
       render :new
@@ -36,23 +50,27 @@ class DevicesController < ApplicationController
   # end
 
   def associate
+    session[:return_to] ||= request.referer
+
     device = Device.find(params[:id])
     student = Student.find(params[:student])
 
     if device.student
-      redirect_to student, flash: {error: "Device #{device.device_type} #{device.serial_number} #{device.district_tag} already has an owner: #{device.student.id_number}"}
+      redirect_to session.delete(:return_to), flash: {error: "Device #{device.device_type} #{device.serial_number} #{device.district_tag} already has an owner: #{device.student.id_number}"}
     else
       device.associate(student)
-      redirect_to student, flash: {success: "Added #{device.device_type} #{device.serial_number} #{device.district_tag} to #{student.id_number}."}
+      redirect_to session.delete(:return_to), flash: {success: "Added #{device.device_type} #{device.serial_number} #{device.district_tag} to #{student.id_number}."}
     end
   end
 
   def deassociate
+    session[:return_to] ||= request.referer
+
     device = Device.find(params[:id])
     student = device.student
     device.deassociate
     
-    redirect_to student, flash: {success: "Removed #{device.device_type} #{device.serial_number} #{device.district_tag} from user."}
+    redirect_to session.delete(:return_to), flash: {success: "Removed #{device.device_type} #{device.serial_number} #{device.district_tag} from user."}
   end
 
   private
