@@ -1,0 +1,8 @@
+<H3>History:</H3>
+<% if @history %>
+  <ul>
+  <% @history.each do |note| %>
+    <li><b><%= note.created_at.in_time_zone("Pacific Time (US & Canada)").asctime %>:</B> <%= note.note %> | <% if note.device %>Tag: <%= link_to "#{note.device.district_tag}", note.device %><% end %><% if note.student %><%= note.device && note.student ? " - " : "" %>ID: <%= link_to "#{note.student.id_number}", note.student %><% end %></li>
+  <% end %>
+  </ul>
+<% end %>

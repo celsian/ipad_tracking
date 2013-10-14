@@ -2,14 +2,21 @@ class Device < ActiveRecord::Base
   belongs_to :student
   has_many :notes, dependent: :destroy
 
+  validates :serial_number, :district_tag, presence: true, uniqueness: true
+
   DEVICES = ["iPad", "MacBook Pro", "MacBook Air"]
 
   def associate(student)
-    self.update_attribute(:student_id, student.id)
+    if self.update_attribute(:student_id, student.id)
+      Note.create(student: student, device: self, note: "Device was added to student.")
+    end
   end
 
   def deassociate
-    self.update_attribute(:student_id, nil)
+    student = self.student
+    if self.update_attribute(:student_id, nil)
+      Note.create(student: student, device: self, note: "Device was removed from student.")
+    end
   end
 
   def self.search query

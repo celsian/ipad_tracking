@@ -1,11 +1,17 @@
 class StudentsController < ApplicationController
   def index
     @students = Student.all
+
+    @student_search = Student.new
+    if params[:q]
+      @students = Student.search params[:q]
+    end
   end
 
   def show
     @student = Student.find(params[:id])
     @devices = @student.devices
+    @history = @student.notes
 
     @device_search = Device.new
     if params[:q]
@@ -19,8 +25,10 @@ class StudentsController < ApplicationController
 
   def create
     @student = Student.new student_params
+    @student.title_case
 
-    if @student.save #If it can save, redirects to movie path, otherwise renders new page again (and errors are displayed)
+    if @student.save
+      Note.create(student: @student, note: "Student #{@student.id_number} was created.")
       redirect_to students_path, flash: {success: "Student was created."}
     else
       render :new

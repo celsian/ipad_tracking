@@ -1,8 +1,11 @@
 <h1>Device List:</h1>
 <%= link_to "New Device", new_device_path %>
-<br><br>
+<%= form_tag devices_path, :method => :get, :class => "form-search" do %>
+  <%= text_field_tag :q, '',size: 10, autofocus: true %>
+  <%= submit_tag "Search", class: 'btn btn-mini' %>
+<% end %>
 <ul>
 <% @devices.each do |device| %>
-  <li><%= link_to "#{device.device_type}", device_path(device) %> - <%= device.serial_number %> - <%= device.district_tag %></li>
+  <li><%= device.device_type %> - <%= link_to "#{device.serial_number}", device_path(device) %> - <%= device.district_tag %></li>
 <% end %>
 </ul>

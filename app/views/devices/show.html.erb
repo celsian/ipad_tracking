@@ -1,9 +1,30 @@
-<h3>Device: <%= "#{@device.device_type}" %></h3>
-<%= "Serial Number: #{@device.serial_number} District Tag: #{@device.district_tag}" %><br>
-Current Owner: <%= @device.student ? "#{@device.student.first_name} #{@device.student.last_name} #{@device.student.id_number}" : "None" %>
-<br>
-<br>
+<H2>Device: <%= "#{@device.device_type}" %></H2>
+<%= "Serial Number: #{@device.serial_number}" %><br>
+<%= "District Tag: #{@device.district_tag}" %><br>
+Current User:
+<% if @device.student %>
+  <%= link_to "#{@device.student.first_name} #{@device.student.last_name} - #{@device.student.id_number}", @device.student %> | <%= link_to "Remove", deassociate_path(@device), data: { confirm: "Remove device from user?" } %>
+  <br>
+  <br>
+<% else %>
+  None.<br>
+  <br>
+  <%= form_tag device_path, method: :get, class: "form-search" do %>
+  <%= text_field_tag :q, '',size: 10, class: "input-medium search-query", autofocus: true %>
+  <%= submit_tag "Search", class: 'btn btn-mini' %>
+  <% end %>
+
+  <% if @students_search %>
+    <%= @students_search.length > 0 ? "Results:" : "No Results Found." %>
+    <ul>
+      <% @students_search.each do |student| %>
+        <li><%= link_to "#{student.first_name} #{student.last_name}", student_path(student) %> - <%= student.id_number %> - <%= link_to "Add to Student", associate_path(@device, student: student), data: { confirm: "Add #{student.first_name} #{student.last_name} - #{student.id_number} to device?" } %></li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
 <%= link_to "Permanently Delete", @device, data: { confirm: "Are you sure you want to permanently delete this device?" }, method: :delete %>
 <br>
-<br>
-<h4>History:</h4>
+<%= render "notes/history" %>
+
+<%= render "notes/add" %>

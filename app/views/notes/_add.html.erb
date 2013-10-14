@@ -1,0 +1,20 @@
+<h3>Add note:</h3>
+<%= form_for @note do |f| %>
+
+<div class="field">
+    <%= f.text_field :note, autofocus: true %>
+    <%= f.hidden_field :device_id, value: @device.id %>
+    <% if @device.student %>
+        <%= f.hidden_field :student_id, value: @device.student.id %>
+    <% end %>
+
+</div>
+
+<div id="error_explanation">
+    <% if @note.errors.any? %>
+      <%= render "errors", object: f.object %>
+    <% end %>
+</div>
+
+  <%= f.submit class: 'btn btn-primary'  %>
+<% end %>
