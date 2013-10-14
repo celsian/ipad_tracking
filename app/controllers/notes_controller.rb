@@ -3,7 +3,6 @@ class NotesController < ApplicationController
   def new
     @note = Note.new
   end
-  
 
   def create
     session[:return_to] ||= request.referer
