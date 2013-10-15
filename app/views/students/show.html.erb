@@ -1,4 +1,4 @@
-<h3><%= @student.first_name %> <%= @student.last_name %>: <%= @student.id_number %> </h3>
+<h3><%= @student.first_name %> <%= @student.last_name %> (<%= @student.grade_level %>) ID: <%= @student.id_number %> </h3>
 
 <%= form_tag student_path, method: :get, class: "form-search" do %>
   <%= text_field_tag :q, '',size: 10, class: "input-medium search-query", autofocus: true %>
