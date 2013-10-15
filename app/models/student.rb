@@ -35,6 +35,16 @@ class Student < ActiveRecord::Base
     where("first_name LIKE :query OR last_name LIKE :query OR id_number LIKE :query", query: "%#{query}%")
   end
 
+  def self.no_devices_search #returns an array of student objects that do not have devices.
+    no_devices = []
+    Student.all.map do |student|
+      if student.devices == []
+        no_devices << student
+      end
+    end
+    return no_devices
+  end
+
   def self.import_all(file)
     CSV.foreach(file.path, headers: true) do |row|
       student = find_by(id_number: row["id_number"]) || Student.new
