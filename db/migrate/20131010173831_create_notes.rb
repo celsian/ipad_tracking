@@ -4,6 +4,7 @@ class CreateNotes < ActiveRecord::Migration
       t.string :note
       t.references :device, index: true
       t.references :student, index: true
+      t.references :user, index: true
 
       t.timestamps
     end
