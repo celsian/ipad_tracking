@@ -1,4 +1,5 @@
 <H2>Device: <%= "#{@device.device_type}" %></H2>
+<%= link_to "Permanently Delete", @device, data: { confirm: "Are you sure you want to permanently delete this device?" }, method: :delete %><br>
 <b>Serial Number:</b> <%= "#{@device.serial_number}" %><br>
 <b>District Tag:</b> <%= "#{@device.district_tag}" %><br>
 <b>Current User:</b>
@@ -10,8 +11,9 @@
   None.<br>
   <br>
   <%= form_tag device_path, method: :get, class: "form-search" do %>
-  <%= text_field_tag :q, '',size: 10, class: "input-medium search-query", autofocus: true %>
-  <%= submit_tag "Search", class: 'btn btn-mini' %>
+    <%= label_tag 'Student Search:' %>
+    <%= text_field_tag :q, '',size: 10, class: "input-medium search-query", autofocus: true %>
+    <%= submit_tag "Search", class: 'btn btn-mini' %>
   <% end %>
 
   <% if @students_search %>
@@ -23,8 +25,6 @@
     </ul>
   <% end %>
 <% end %>
-<%= link_to "Permanently Delete", @device, data: { confirm: "Are you sure you want to permanently delete this device?" }, method: :delete %>
-<br>
 <%= render "notes/history" %>
 
 <%= render "notes/add" %>

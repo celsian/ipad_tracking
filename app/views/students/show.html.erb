@@ -1,6 +1,8 @@
 <h3><%= @student.first_name %> <%= @student.last_name %> (<%= @student.grade_level %>) ID: <%= @student.id_number %> </h3>
+<%= link_to "Permanently Delete Student", @student, data: { confirm: "Are you sure you want to permanently delete this student?" }, method: :delete %><br><br>
 
 <%= form_tag student_path, method: :get, class: "form-search" do %>
+  <%= label_tag 'Device Search:' %>
   <%= text_field_tag :q, '',size: 10, class: "input-medium search-query", autofocus: true %>
   <%= submit_tag "Search", class: 'btn btn-mini' %>
 <% end %>
@@ -13,7 +15,6 @@
     <% end %>
   </ul>
 <% end %>
-<%= link_to "Permanently Delete Student", @student, data: { confirm: "Are you sure you want to permanently delete this student?" }, method: :delete %>
 <H3>Devices:</H3>
 <% @devices.each do |device| %>
   <li><%= device.device_type %>: <%= link_to "#{device.serial_number}", device %> - <%= device.district_tag %> | <%= link_to "Remove Device", deassociate_path(device), data: { confirm: "Remove device from user?" } %></li>
