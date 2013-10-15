@@ -1,9 +1,9 @@
 <H2>Device: <%= "#{@device.device_type}" %></H2>
-<%= "Serial Number: #{@device.serial_number}" %><br>
-<%= "District Tag: #{@device.district_tag}" %><br>
-Current User:
+<b>Serial Number:</b> <%= "#{@device.serial_number}" %><br>
+<b>District Tag:</b> <%= "#{@device.district_tag}" %><br>
+<b>Current User:</b>
 <% if @device.student %>
-  <%= link_to "#{@device.student.first_name} #{@device.student.last_name} - #{@device.student.id_number}", @device.student %> | <%= link_to "Remove", deassociate_path(@device), data: { confirm: "Remove device from user?" } %>
+  <%= render "students/student", student: @device.student %> - <%= link_to "Remove", deassociate_path(@device), data: { confirm: "Remove device from user?" } %>
   <br>
   <br>
 <% else %>
@@ -18,7 +18,7 @@ Current User:
     <%= @students_search.length > 0 ? "Results:" : "No Results Found." %>
     <ul>
       <% @students_search.each do |student| %>
-        <li><%= link_to "#{student.first_name} #{student.last_name}", student_path(student) %> - <%= student.id_number %> - <%= link_to "Add to Student", associate_path(@device, student: student), data: { confirm: "Add #{student.first_name} #{student.last_name} - #{student.id_number} to device?" } %></li>
+        <li><%= render "students/student", student: student %> - <%= link_to "Add to Student", associate_path(@device, student: student), data: { confirm: "Add #{student.first_name} #{student.last_name} - #{student.id_number} to device?" } %></li>
       <% end %>
     </ul>
   <% end %>
