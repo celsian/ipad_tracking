@@ -39,14 +39,18 @@ class Student < ActiveRecord::Base
     CSV.foreach(file.path, headers: true) do |row|
       student = find_by(id_number: row["id_number"]) || Student.new
       student.attributes = row.to_hash.slice("id_number", "grade_level", "first_name", "last_name")
-      student.save
 
       device = Device.find_by(serial_number: row["serial_number"]) || Device.new
       device.attributes = row.to_hash.slice("device_type", "serial_number", "district_tag")
-      # binding.pry
-      device.save
+      
+      if device.save
+        Note.create(device: device, note: "Device was imported/updated.")
+      end
 
-      device.associate(student)
+      if student.save
+        Note.create(student: student, note: "Student was imported/updated.")
+        device.associate(student)
+      end
     end
   end
 
