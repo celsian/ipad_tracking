@@ -1,4 +1,6 @@
 class StudentsController < ApplicationController
+  require 'csv'
+
   before_action :authenticate_user!
   before_action :require_admin
 
@@ -44,10 +46,15 @@ class StudentsController < ApplicationController
     redirect_to students_path, flash: {success: "Student was deleted."}
   end
 
+  def import_all
+    Student.import_all(params[:file])
+    redirect_to students_path, flash: {success: "Students & Devices imported."}
+  end
+
   private
 
   def student_params
-    params.require(:student).permit(:first_name, :last_name, :id_number)
+    params.require(:student).permit(:first_name, :last_name, :id_number, :grade_level)
   end
 
   def require_admin
