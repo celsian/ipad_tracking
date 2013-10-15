@@ -5,9 +5,11 @@ IpadTracking::Application.routes.draw do
   resources :students
   resources :devices
   resources :notes
+  resources :admins
 
   get "/deassociate/:id", to: "devices#deassociate", as: "deassociate"
   get "/associate/:id", to: "devices#associate", as: "associate"
+  post "/admin/", to: "students#import_all", as: "import_all"
   
 
   # The priority is based upon order of creation: first created -> highest priority.
