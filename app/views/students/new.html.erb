@@ -8,6 +8,8 @@
     <%= f.text_field :last_name %>
     <%= f.label :id_number %>
     <%= f.text_field :id_number %>
+    <%= f.label :grade_level %>
+    <%= f.collection_select :grade_level, Student::GRADE_LEVEL, :to_i, :to_i, :include_blank => false %>
 </div>
 
 <div id="error_explanation">
