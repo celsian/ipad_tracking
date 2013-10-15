@@ -42,15 +42,16 @@ class Student < ActiveRecord::Base
 
       device = Device.find_by(serial_number: row["serial_number"]) || Device.new
       device.attributes = row.to_hash.slice("device_type", "serial_number", "district_tag")
-      binding.pry
-      
+
       if device.save
         Note.create(device: device, note: "Device was imported/updated.")
       end
 
       if student.save
         Note.create(student: student, note: "Student was imported/updated.")
-        device.associate(student)
+        if device.save
+          device.associate(student)
+        end
       end
     end
   end
