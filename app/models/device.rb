@@ -2,7 +2,8 @@ class Device < ActiveRecord::Base
   belongs_to :student
   has_many :notes
 
-  validates :serial_number, :district_tag, presence: true, uniqueness: true
+  validates :serial_number, :district_tag, uniqueness: true
+  validates :device_type, :serial_number, :district_tag, presence: true
 
   DEVICES = ["iPad", "MacBook Pro", "MacBook Air"]
 
