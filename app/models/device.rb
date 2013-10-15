@@ -1,6 +1,6 @@
 class Device < ActiveRecord::Base
   belongs_to :student
-  has_many :notes, dependent: :destroy
+  has_many :notes
 
   validates :serial_number, :district_tag, presence: true, uniqueness: true
 
