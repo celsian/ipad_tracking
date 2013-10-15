@@ -6,6 +6,6 @@
 <% end %>
 <ul>
 <% @devices.each do |device| %>
-  <li><%= device.device_type %> - <%= link_to "#{device.serial_number}", device_path(device) %> - <%= device.district_tag %></li>
+  <li><%= render "device", device: device %></li>
 <% end %>
 </ul>
