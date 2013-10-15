@@ -2,8 +2,10 @@ class Student < ActiveRecord::Base
   has_many :devices
   has_many :notes
 
-  validates :first_name, :last_name, :id_number, presence: true
+  validates :first_name, :last_name, :id_number, :grade_level, :active, presence: true
   validates :id_number, uniqueness: true
+
+  GRADE_LEVEL = [9, 10, 11, 12]
 
   default_scope order("last_name, first_name")
 
@@ -32,4 +34,20 @@ class Student < ActiveRecord::Base
     query = Student.title_case_query(query)
     where("first_name LIKE :query OR last_name LIKE :query OR id_number LIKE :query", query: "%#{query}%")
   end
+
+  def self.import_all(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      student = find_by(id_number: row["id_number"]) || Student.new
+      student.attributes = row.to_hash.slice("id_number", "grade_level", "first_name", "last_name")
+      student.save
+
+      device = Device.find_by(serial_number: row["serial_number"]) || Device.new
+      device.attributes = row.to_hash.slice("device_type", "serial_number", "district_tag")
+      # binding.pry
+      device.save
+
+      device.associate(student)
+    end
+  end
+
 end
