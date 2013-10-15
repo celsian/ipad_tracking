@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :require_admin
 
   def index
     @students = Student.all
@@ -47,6 +48,12 @@ class StudentsController < ApplicationController
 
   def student_params
     params.require(:student).permit(:first_name, :last_name, :id_number)
+  end
+
+  def require_admin
+    unless current_user.admin == true
+      redirect_to root_path, flash: {error: "You are not authorized to perform that action."}
+    end
   end
 
 end

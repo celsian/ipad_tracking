@@ -1,5 +1,6 @@
 class NotesController < ApplicationController
   before_action :authenticate_user!
+  before_action :require_admin
   
   def new
     @note = Note.new
@@ -22,4 +23,11 @@ class NotesController < ApplicationController
   def note_params
     params.require(:note).permit(:note, :device_id, :student_id)
   end
+
+  def require_admin
+    unless current_user.admin == true
+      redirect_to root_path, flash: {error: "You are not authorized to perform that action."}
+    end
+  end
+
 end

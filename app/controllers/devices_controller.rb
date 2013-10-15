@@ -1,6 +1,7 @@
 class DevicesController < ApplicationController
   before_action :authenticate_user!
-  
+  before_action :require_admin
+
   def index
     @devices = Device.all
 
@@ -79,5 +80,11 @@ class DevicesController < ApplicationController
 
   def device_params
     params.require(:device).permit(:device_type, :serial_number, :district_tag)
+  end
+
+  def require_admin
+    unless current_user.admin == true
+      redirect_to root_path, flash: {error: "You are not authorized to perform that action."}
+    end
   end
 end
