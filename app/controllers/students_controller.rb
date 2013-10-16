@@ -4,12 +4,17 @@ class StudentsController < ApplicationController
   before_action :authenticate_user!
   before_action :require_admin
 
-  def index
-    @students = Student.all
+  def index #links will go 0, 20, 40, 60...
+    @page = (params[:page] || 1).to_i
+    @students = Student.all[(@page-1)*20..((@page-1)*20+19)]
+    @last = ((Student.all.length/20)+1).to_i
 
     @student_search = Student.new
+    @search = params[:q]
     if params[:q]
-      @students = Student.search params[:q]
+      @students = (Student.search params[:q])
+      @last = ((@students.all.length/20)+1).to_i
+      @students = @students[(@page-1)*20..((@page-1)*20+19)]
     end
   end
 

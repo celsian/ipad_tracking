@@ -3,11 +3,16 @@ class DevicesController < ApplicationController
   before_action :require_admin
 
   def index
-    @devices = Device.all
+    @page = (params[:page] || 1).to_i
+    @devices = Device.all[(@page-1)*20..((@page-1)*20+19)]
+    @last = ((Device.all.length/20)+1).to_i
 
     @device_search = Device.new
+    @search = params[:q]
     if params[:q]
       @devices = Device.search params[:q]
+      @last = ((@devices.all.length/20)+1).to_i
+      @devices = @devices[(@page-1)*20..((@page-1)*20+19)]
     end
   end
 
