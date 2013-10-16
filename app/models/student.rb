@@ -59,6 +59,12 @@ class Student < ActiveRecord::Base
 
       if student.save
         Note.create(student: student, note: "Student was imported/updated.")
+
+        note = Note.new
+        note.attributes = row.to_hash.slice("note")
+        note.student = student
+        note.save
+
         if device.save
           device.associate(student)
         end
