@@ -17,6 +17,7 @@ class DevicesController < ApplicationController
   end
 
   def show
+    @current_user = current_user
     @device = Device.find(params[:id])
     @history = @device.notes
 
