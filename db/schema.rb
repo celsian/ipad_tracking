@@ -31,12 +31,14 @@ ActiveRecord::Schema.define(version: 20131014235357) do
     t.string   "note"
     t.integer  "device_id"
     t.integer  "student_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "notes", ["device_id"], name: "index_notes_on_device_id", using: :btree
   add_index "notes", ["student_id"], name: "index_notes_on_student_id", using: :btree
+  add_index "notes", ["user_id"], name: "index_notes_on_user_id", using: :btree
 
   create_table "students", force: true do |t|
     t.string   "first_name"
