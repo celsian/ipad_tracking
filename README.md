@@ -1,4 +1,4 @@
-ipad_tracking
+Device Tracking
 =============
 
 App currently available for testing: http://device-tracking.herokuapp.com/
