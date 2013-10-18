@@ -6,6 +6,22 @@ class AdminsController < ApplicationController
 
   end
 
+  def import_all
+
+  end
+
+  def import_all_submit
+    Student.import_all(params[:file])
+    redirect_to root_path, flash: {success: "Students & Devices imported."}
+  end
+
+  def update_admins
+    User.disable_all_admins
+    User.update_admins(params, current_user)
+
+    redirect_to administrator_path, flash: {success: "Administrators Updated."}
+  end
+
   private
 
   def require_admin
