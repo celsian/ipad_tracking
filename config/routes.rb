@@ -9,7 +9,12 @@ IpadTracking::Application.routes.draw do
 
   get "/deassociate/:id", to: "devices#deassociate", as: "deassociate"
   get "/associate/:id", to: "devices#associate", as: "associate"
-  post "/admin/", to: "students#import_all", as: "import_all"
+  post "/admin/import_all_submit", to: "admins#import_all_submit", as: "import_all_submit"
+  get "/admin/import_all", to: "admins#import_all", as: "import_all"
+  get "/admin/edit_admins", to: "admins#edit_admins", as: "edit_admins"
+  post "/admin/update_admins", to: "admins#update_admins", as: "update_admins"
+  get "/admin", to: "admins#index", as: "administrator"
+
   
 
   # The priority is based upon order of creation: first created -> highest priority.
