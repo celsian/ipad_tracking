@@ -1,0 +1,14 @@
+<H3>Edit Current Administrators:</H3>
+
+<%= form_tag update_admins_path, multipart: true do %>
+  <% User.all.each do |user| %>
+    <% if user.admin && current_user == user %>
+      <%= check_box_tag user.id, 'admin', true, disabled: true %> <%= user.email %> (You)<br>
+    <% elsif user.admin %>
+      <%= check_box_tag user.id, 'admin', true %> <%= user.email %><br>
+    <% else %>
+      <%= check_box_tag user.id, 'admin' %> <%= user.email %><br>
+    <% end %>
+  <% end %><br>
+  <%= submit_tag "Update" %>
+<% end %>
