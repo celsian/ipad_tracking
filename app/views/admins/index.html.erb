@@ -1,6 +1,6 @@
 <H3>Admin Tools:</H3>
 
-<%= form_tag import_all_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "Import" %>
-<% end %>
+<OL style="list-style-type: decimal" >
+  <LI><%= link_to "Import All", import_all_path %>: Students, Devices or Both.</li>
+  <LI><%= link_to "Edit Administrators", edit_admins_path %>: Add or Remove rights.</LI>
+<OL>
