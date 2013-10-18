@@ -1,0 +1,6 @@
+<h3>Import Students & Devices:</h3>
+
+<%= form_tag import_all_submit_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
