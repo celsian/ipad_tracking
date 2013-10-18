@@ -51,11 +51,6 @@ class StudentsController < ApplicationController
     redirect_to students_path, flash: {success: "Student was deleted."}
   end
 
-  def import_all
-    Student.import_all(params[:file])
-    redirect_to students_path, flash: {success: "Students & Devices imported."}
-  end
-
   private
 
   def student_params
