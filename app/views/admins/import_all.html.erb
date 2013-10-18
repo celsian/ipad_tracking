@@ -1,6 +1,16 @@
 <h3>Import Students & Devices:</h3>
-
+- This tool allows you to import Students, Devices or Both.<br>
+- Uploads must be in <b>.CSV</b> format and fields must use the following field headers:<br>
+- <b><font color="red">last_name | first_name | grade_level | id_number |</font><font color="blue"> serial_number | district_tag | device_type |</font><font color="green"> note</font></b><br>
+<ul>
+  <li>To import <b><font color="red">Students</font></b> you must include all <b><font color="red">Red</font></b> fields.</li>
+  <li>To import <b><font color="blue">Devices</font></b> you must include all <b><font color="blue">Blue</font></b> fields.</li>
+  <li>To import <b><font color="green">a Note</font></b> you must include all <b><font color="green">Green</font></b> fields.</li>
+</ul>
+- Red, Blue and Green items entered on the same line will automatically be linked together during the import process.<br>
+<br>
+<b>Import:</b>
 <%= form_tag import_all_submit_path, multipart: true do %>
-  <%= file_field_tag :file %>
+  <%= file_field_tag :file %><br>
   <%= submit_tag "Import" %>
 <% end %>
