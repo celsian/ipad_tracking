@@ -23,6 +23,8 @@ class StudentsController < ApplicationController
     @devices = @student.devices
     @history = @student.notes
 
+    @note = Note.new
+
     @device_search = Device.new
     if params[:q]
       @devices_search = Device.search params[:q]
