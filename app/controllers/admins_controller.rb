@@ -6,6 +6,10 @@ class AdminsController < ApplicationController
 
   end
 
+  def logs
+    @notes = Note.all
+  end
+
   def import_all
 
   end
