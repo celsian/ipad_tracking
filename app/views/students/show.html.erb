@@ -20,3 +20,4 @@
   <li><%= device.device_type %>: <%= link_to "#{device.serial_number}", device %> - <%= device.district_tag %> | <%= link_to "Remove Device", deassociate_path(device), data: { confirm: "Remove device from user?" } %></li>
 <% end %>
 <%= render "notes/history" %>
+<%= render "notes/add_student" %>
