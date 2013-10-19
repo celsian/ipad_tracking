@@ -1,0 +1,8 @@
+<H3>User Logs:</H3>
+<% if @notes %>
+  <ul>
+  <% @notes.each do |note| %>
+    <li><b><%= note.created_at.in_time_zone("Pacific Time (US & Canada)").asctime %>:</B> <%= note.note %> | <% if note.device %>Tag: <%= link_to "#{note.device.district_tag}", note.device %><% end %><% if note.student %><%= note.device && note.student ? " - " : "" %>ID: <%= link_to "#{note.student.id_number}", note.student %><% end %><% if note.user == current_user %> - <%= link_to "Delete Note", note, data: { confirm: "Are you sure you want to permanently delete this device?" }, method: :delete %><% end %></li>
+  <% end %>
+  </ul>
+<% end %>
