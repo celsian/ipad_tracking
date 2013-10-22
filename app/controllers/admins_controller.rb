@@ -7,7 +7,9 @@ class AdminsController < ApplicationController
   end
 
   def logs
-    @notes = Note.all
+    @page = (params[:page] || 1).to_i
+    @notes = Note.all[(@page-1)*20..((@page-1)*20+19)]
+    @last = ((Note.all.length/20)+1).to_i
   end
 
   def import_all

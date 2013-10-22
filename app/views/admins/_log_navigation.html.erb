@@ -1,0 +1,41 @@
+<TABLE border="0">
+  <TR>
+    <TD width="18" align="center">
+<font size ="4">
+<%= link_to "«", admin_logs_path(page: 1, q: "#{@search || ""}") %>
+<% if @page > 1 %><%= link_to "‹", admin_logs_path(page: (@page-1), q: "#{@search || ""}") %><% else %>‹<% end %>
+</font>
+    </TD>
+<% if @page-3 > 0 %>
+    <TD width="12" align="center">
+<%= @page-3 > 0 ? "..." : "" %>
+    </TD>
+<% end %>
+<% if @page-2 >= 1 %>
+    <TD width="16" align="center">
+<%= link_to "#{@page-2}", admin_logs_path(page: (@page-2), q: "#{@search || ""}") %>
+    </TD>
+<% end %>
+    <TD width="16" align="center">
+<% if @page-1 >= 1 %><%= link_to "#{@page-1}", admin_logs_path(page: (@page-1), q: "#{@search || ""}") %><% end %>  
+    </TD>
+    <TD width="16" align="center">
+<%= @page %>
+    </TD>
+    <TD width="16" align="center">
+<% if @page+1 <= @last %><%= link_to "#{@page+1}", admin_logs_path(page: (@page+1), q: "#{@search || ""}") %><% end %>
+    </TD>
+    <TD width="16" align="center">
+<% if @page+2 <= @last %><%= link_to "#{@page+2}", admin_logs_path(page: (@page+2), q: "#{@search || ""}") %><% end %>
+    </TD>
+    <TD width="12" align="center">
+<%= @page+3 < @last ? "..." : "" %>
+    </TD>
+    <TD width="18" align="center">
+<font size ="4">
+<% if @page+1 <= @last %><%= link_to "›", admin_logs_path(page: (@page+1), q: "#{@search || ""}") %><% else %>›<% end %>
+<%= link_to "»", admin_logs_path(page: @last, q: "#{@search || ""}") %>
+</font>
+    </TD>
+  </TR>
+</TABLE>
