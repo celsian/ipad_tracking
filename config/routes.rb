@@ -7,6 +7,8 @@ IpadTracking::Application.routes.draw do
   resources :notes
   resources :admins
 
+  get "/show/meraki/:serial", to: "devices#meraki", as: "meraki"
+
   get "/deassociate/:id", to: "devices#deassociate", as: "deassociate"
   get "/associate/:id", to: "devices#associate", as: "associate"
   post "/admin/import_all_submit", to: "admins#import_all_submit", as: "import_all_submit"
