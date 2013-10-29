@@ -17,7 +17,7 @@
 <% end %>
 <H3>Devices:</H3>
 <% @devices.each do |device| %>
-  <li><%= device.device_type %>: <%= link_to "#{device.serial_number}", device %> - <%= device.district_tag %> | <%= link_to "Remove Device", deassociate_path(device), data: { confirm: "Remove device from user?" } %></li>
+  <li><%= device.device_type %>: <%= link_to "#{device.serial_number}", device %> - <%= device.district_tag %> | <%= link_to "Remove Device", deassociate_path(device), data: { confirm: "Remove device from user?" } %> <%= link_to image_tag("meraki.png", :size => "32x32"), meraki_path(serial: device.serial_number), target: "_blank" %></li>
 <% end %>
 <%= render "notes/history" %>
 <%= render "notes/add_student" %>
