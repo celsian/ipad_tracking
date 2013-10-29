@@ -45,6 +45,11 @@ class DevicesController < ApplicationController
     end
   end
 
+  def meraki
+    url = "https://n48.meraki.com/EUHSD-Systems-Ma/n/nuDCmcm/manage/pcc/list#q=" + params[:serial]
+    redirect_to url
+  end
+
   def destroy
     Device.find(params[:id]).destroy
     
