@@ -27,7 +27,7 @@ class AdminsController < ApplicationController
 
     redirect_to administrator_path, flash: {success: "Administrators Updated."}
   end
-
+  
   private
 
   def require_admin
