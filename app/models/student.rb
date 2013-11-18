@@ -46,7 +46,9 @@ class Student < ActiveRecord::Base
   end
 
   def self.import_all(file)
+    # binding.pry
     CSV.foreach(file.path, headers: true) do |row|
+
       student = find_by(id_number: row["id_number"]) || Student.new
       student.attributes = row.to_hash.slice("id_number", "grade_level", "first_name", "last_name")
 
@@ -68,8 +70,10 @@ class Student < ActiveRecord::Base
         if device.save
           device.associate(student)
         end
-      end
-    end
-  end
+      end #if student.save
+
+    end #CSV
+
+  end #def end.
 
 end
