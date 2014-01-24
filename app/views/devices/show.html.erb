@@ -1,5 +1,5 @@
 <H2>Device: <%= "#{@device.device_type}" %></H2>
-<%= link_to "Permanently Delete", @device, data: { confirm: "Are you sure you want to permanently delete this device?" }, method: :delete %><br>
+<%= link_to "Edit", edit_device_path(@device), data: { confirm: "Are you sure you want to EDIT this device?" } %> - <%= link_to "Permanently Delete", @device, data: { confirm: "Are you sure you want to PERMANENTLY DELETE this device?" }, method: :delete %><br>
 <b>Serial Number:</b> <%= "#{@device.serial_number}" %> <%= link_to image_tag("meraki.png", :size => "32x32"), meraki_path(serial: @device.serial_number), target: "_blank" %><br>
 <b>District Tag:</b> <%= "#{@device.district_tag}" %><br>
 <b>Current User:</b>
