@@ -45,6 +45,23 @@ class DevicesController < ApplicationController
     end
   end
 
+  def edit
+    @device = Device.find(params[:id])
+  end
+
+  def update
+    @device = Device.find(params[:id])
+    serial = @device.serial_number
+    device_type = @device.device_type
+    district_tag = @device.district_tag
+    if @device.update device_params
+      Note.create(device: @device, note: "Device information was updated from Serial: #{serial}, Device: #{device_type}, District Tag: #{district_tag}.")
+      redirect_to device_path(@device), flash: {success: "Device was updated."}
+    else
+      render :edit
+    end
+  end
+
   def meraki
     url = "https://n48.meraki.com/EUHSD-Systems-Ma/n/nuDCmcm/manage/pcc/list#q=" + params[:serial]
     redirect_to url
