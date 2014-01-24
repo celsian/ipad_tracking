@@ -1,0 +1,20 @@
+<h1>Edit Device:</h1>
+<%= form_for @device do |f| %>
+
+<div class="field">
+    <%= f.label :device_type %>
+    <%= f.collection_select :device_type, Device::DEVICES, :to_s, :to_s, :include_blank => false %>
+    <%= f.label :serial_number %>
+    <%= f.text_field :serial_number %>
+    <%= f.label :district_tag %>
+    <%= f.text_field :district_tag %>
+</div>
+
+<div id="error_explanation">
+    <% if @device.errors.any? %>
+      <%= render "errors", object: f.object %>
+    <% end %>
+</div>
+
+  <%= f.submit class: 'btn btn-primary'  %>
+<% end %>
