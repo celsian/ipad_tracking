@@ -1,6 +1,6 @@
 class DevicesController < ApplicationController
   before_action :authenticate_user!
-  before_action :require_admin
+  # before_action :require_admin
 
   def index
     @page = (params[:page] || 1).to_i

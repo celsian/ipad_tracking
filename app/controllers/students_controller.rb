@@ -2,7 +2,7 @@ class StudentsController < ApplicationController
   require 'csv'
 
   before_action :authenticate_user!
-  before_action :require_admin
+  # before_action :require_admin
 
   def index #links will go 0, 20, 40, 60...
     @page = (params[:page] || 1).to_i
