@@ -6,6 +6,7 @@ class Student < ActiveRecord::Base
   validates :id_number, uniqueness: true
 
   GRADE_LEVEL = [9, 10, 11, 12]
+  INSURANCE = ["Yes", "No"]
 
   default_scope order("last_name, first_name")
 
