@@ -56,7 +56,9 @@ class StudentsController < ApplicationController
   private
 
   def student_params
-    params.require(:student).permit(:first_name, :last_name, :id_number, :grade_level)
+    params.require(:student).permit(:first_name, :last_name, :id_number, :grade_level, :insurance,
+                                    :current_school, :parent_1_name, :parent_1_phone, :parent_2_name,
+                                    :parent_2_phone)
   end
 
   def require_admin
@@ -64,5 +66,4 @@ class StudentsController < ApplicationController
       redirect_to root_path, flash: {error: "You are not authorized to perform that action."}
     end
   end
-
 end
