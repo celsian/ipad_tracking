@@ -1,12 +1,15 @@
 <div class="row">
-  <span class="span12">
+  <div class="span6">
     <h3><%= @student.first_name %> <%= @student.last_name %> (<%= @student.grade_level %>) ID: <%= @student.id_number %></h3>
     <P><%= link_to "Delete Student", @student, data: { confirm: "Are you sure you want to permanently delete this student?" }, method: :delete %></P>
-  </span>
+  </div>
+  <div class="span6">
+    <h3>Finance:</h3>
+  </div>
 </div>
 
 <div class="row">
-  <span class="span5">
+  <div class="span6">
     <table class="table table-striped">
       <tr>
         <td>
@@ -32,7 +35,11 @@
     <% @devices.each do |device| %>
       <li><%= device.device_type %>: <%= link_to "#{device.serial_number}", device %> - <%= device.district_tag %> | <%= link_to "Remove Device", deassociate_path(device), data: { confirm: "Remove device from user?" } %> <%= link_to image_tag("meraki.png", :size => "32x32"), meraki_path(serial: device.serial_number), target: "_blank" %></li>
     <% end %>
-    </span>
+  </div>
+
+  <div class="span6">
+  <p>This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test.</p>
+  </div>
 </div>
 
 <div class="row">
