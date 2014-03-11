@@ -1,23 +1,43 @@
-<h3><%= @student.first_name %> <%= @student.last_name %> (<%= @student.grade_level %>) ID: <%= @student.id_number %> </h3>
-<%= link_to "Permanently Delete Student", @student, data: { confirm: "Are you sure you want to permanently delete this student?" }, method: :delete %><br><br>
+<div class="row">
+  <span class="span12">
+    <h3><%= @student.first_name %> <%= @student.last_name %> (<%= @student.grade_level %>) ID: <%= @student.id_number %></h3>
+    <P><%= link_to "Delete Student", @student, data: { confirm: "Are you sure you want to permanently delete this student?" }, method: :delete %></P>
+  </span>
+</div>
 
-<%= form_tag student_path, method: :get, class: "form-search" do %>
-  <%= label_tag 'Device Search:' %>
-  <%= text_field_tag :q, '',size: 10, class: "input-medium search-query", autofocus: true %>
-  <%= submit_tag "Search", class: 'btn btn-mini' %>
-<% end %>
+<div class="row">
+  <span class="span5">
+    <table class="table table-striped">
+      <tr>
+        <td>
+          <%= form_tag student_path, method: :get, class: "form-search" do %>
+            <%= label_tag 'Device Search:' %>
+            <%= text_field_tag :q, '',size: 10, class: "input-medium search-query", autofocus: true %>
+            <%= submit_tag "Search", class: 'btn btn-mini' %>
+          <% end %>
 
-<% if @devices_search %>
-  <%= @devices_search.length > 0 ? "Results:" : "No Results Found." %>
-  <ul>
-    <% @devices_search.each do |device| %>
-      <li><%= device.device_type %>: <%= link_to "#{device.serial_number}", device_path(device) %> - <%= device.district_tag %> | <%= link_to "Add Device", associate_path(device, student: @student), data: { confirm: "Add #{device.serial_number} #{device.district_tag} to user?" } %></li>
+          <% if @devices_search %>
+            <%= @devices_search.length > 0 ? "Results:" : "No Results Found." %>
+            <ul>
+              <% @devices_search.each do |device| %>
+                <li><%= device.device_type %>: <%= link_to "#{device.serial_number}", device_path(device) %> - <%= device.district_tag %> | <%= link_to "Add Device", associate_path(device, student: @student), data: { confirm: "Add #{device.serial_number} #{device.district_tag} to user?" } %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+
+    <H3>Devices:</H3>
+    <% @devices.each do |device| %>
+      <li><%= device.device_type %>: <%= link_to "#{device.serial_number}", device %> - <%= device.district_tag %> | <%= link_to "Remove Device", deassociate_path(device), data: { confirm: "Remove device from user?" } %> <%= link_to image_tag("meraki.png", :size => "32x32"), meraki_path(serial: device.serial_number), target: "_blank" %></li>
     <% end %>
-  </ul>
-<% end %>
-<H3>Devices:</H3>
-<% @devices.each do |device| %>
-  <li><%= device.device_type %>: <%= link_to "#{device.serial_number}", device %> - <%= device.district_tag %> | <%= link_to "Remove Device", deassociate_path(device), data: { confirm: "Remove device from user?" } %> <%= link_to image_tag("meraki.png", :size => "32x32"), meraki_path(serial: device.serial_number), target: "_blank" %></li>
-<% end %>
-<%= render "notes/history" %>
-<%= render "notes/add_student" %>
+    </span>
+</div>
+
+<div class="row">
+  <span class="span12"> 
+    <%= render "notes/history" %>
+    <%= render "notes/add_student" %>
+  </span>
+</div>
