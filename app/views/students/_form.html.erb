@@ -1,0 +1,31 @@
+<%= form_for @student do |f| %>
+  <div class="row">
+    <div class="span4">
+    <P><B>Required:</B></P>
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, autofocus: true %>
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+    <%= f.label :id_number %>
+    <%= f.text_field :id_number %>
+    <%= f.label :grade_level %>
+    <%= f.collection_select :grade_level, Student::GRADE_LEVEL, :to_i, :to_i, :include_blank => false %>
+    </div>
+    <div class="span4">
+    <P><B>Optional:</B></P>
+    <%= f.label :current_school %>
+    <%= f.text_field :current_school %>
+    <%= f.label :parent_1_name %>
+    <%= f.text_field :parent_1_name %>
+    <%= f.label :parent_1_phone %>
+    <%= f.text_field :parent_1_phone %>
+    <%= f.label :parent_2_name %>
+    <%= f.text_field :parent_2_name %>
+    <%= f.label :parent_2_phone %>
+    <%= f.text_field :parent_2_phone %>
+    <%= f.label :insurance %><%= f.collection_select :insurance, Student::INSURANCE, :to_s, :to_s, :include_blank => true %>
+    </div>
+  </div>
+
+  <%= f.submit class: 'btn btn-primary'  %>
+<% end %>
