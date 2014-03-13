@@ -35,6 +35,10 @@ class StudentsController < ApplicationController
     @student = Student.new
   end
 
+  def edit
+    @student = Student.find(params[:id])
+  end
+
   def create
     @student = Student.new student_params
     @student.title_case
@@ -43,7 +47,26 @@ class StudentsController < ApplicationController
       Note.create(student: @student, note: "Student #{@student.id_number} was created.")
       redirect_to students_path, flash: {success: "Student was created."}
     else
+      errors = ""
+      @student.errors.full_messages.each do |message|
+        errors += (" " + message + ".")
+      end
+      flash[:error] = "<B>ERROR:</B> #{errors}"
       render :new
+    end
+  end
+
+  def update
+    @student = Student.find(params[:id])
+    if @student.update_attributes(student_params)
+      redirect_to student_path(@student), flash: {success: "Student was updated."}
+    else
+      errors = ""
+      @student.errors.full_messages.each do |message|
+        errors += (" " + message + ".")
+      end
+      flash[:error] = "<B>ERROR:</B> #{errors}"
+      render :edit
     end
   end
 
