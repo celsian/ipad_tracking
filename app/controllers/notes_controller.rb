@@ -14,7 +14,7 @@ class NotesController < ApplicationController
     if @note.save
       redirect_to session.delete(:return_to), flash: {success: "Note was created."}
     else
-      render :new
+      redirect_to session.delete(:return_to), flash: {error: "Error: Cannot create a blank note."}
     end
   end
 
