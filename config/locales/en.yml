@@ -27,6 +27,12 @@ en:
         first_name: "First Name:"
         last_name: "Last Name:"
         id_number: "ID Number:"
+        current_school: "Current School:"
+        parent_1_name: "1st Parent's Name:"
+        parent_1_phone: "1st Parent's Phone Number:"
+        parent_2_name: "2nd Parent's Name:"
+        parent_2_phone: "2nd Parent's Phone Number:"
+        insurance: "Insurance:"
       device:
         device_type: "Device Type:"
         serial_number: "Serial Number:"
