@@ -1,10 +1,59 @@
 <div class="row">
   <div class="span6">
     <h3><%= @student.first_name %> <%= @student.last_name %> (<%= @student.grade_level %>) ID: <%= @student.id_number %></h3>
-    <P><%= link_to "Delete Student", @student, data: { confirm: "Are you sure you want to permanently delete this student?" }, method: :delete %></P>
+    <P>
+      <table class="table table-striped">
+        <tr>
+          <td>
+            <B>Insurance:</B>
+          </td>
+          <td>
+            <B><%= @student.insurance %></B>
+          </td>
+          <td>
+            <B>Current School:</B>
+          </td>
+          <td>
+            <B><%= @student.current_school %></B>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Parent 1:
+          </td>
+          <td>
+            <%= @student.parent_1_name %>
+          </td>
+          <td>
+            Phone:
+          </td>
+          <td>
+            <%= @student.parent_1_phone %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Parent 2:
+          </td>
+          <td>
+            <%= @student.parent_2_name %>
+          </td>
+          <td>
+            Phone:
+          </td>
+          <td>
+            <%= @student.parent_2_phone %>
+          </td>
+        </tr>
+      </table>
+    </P>
+    <P>
+      <%= link_to "Edit Student", edit_student_path(@student) %> | 
+      <%= link_to "Delete Student", @student, data: { confirm: "Are you sure you want to permanently delete this student?" }, method: :delete %>
+    </P>
   </div>
   <div class="span6">
-    <h3>Finance:</h3>
+    <h3>Finance Information:</h3>
   </div>
 </div>
 
@@ -32,13 +81,17 @@
     </table>
 
     <H3>Devices:</H3>
-    <% @devices.each do |device| %>
-      <li><%= device.device_type %>: <%= link_to "#{device.serial_number}", device %> - <%= device.district_tag %> | <%= link_to "Remove Device", deassociate_path(device), data: { confirm: "Remove device from user?" } %> <%= link_to image_tag("meraki.png", :size => "32x32"), meraki_path(serial: device.serial_number), target: "_blank" %></li>
+    <% if @devices.length > 0 %>
+      <% @devices.each do |device| %>
+        <li><%= device.device_type %>: <%= link_to "#{device.serial_number}", device %> - <%= device.district_tag %> | <%= link_to "Remove Device", deassociate_path(device), data: { confirm: "Remove device from user?" } %> <%= link_to image_tag("meraki.png", :size => "32x32"), meraki_path(serial: device.serial_number), target: "_blank" %></li>
+      <% end %>
+    <% else %>
+      <li>None</li>
     <% end %>
   </div>
 
   <div class="span6">
-  <p>This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test.</p>
+  <p></p>
   </div>
 </div>
 
