@@ -55,7 +55,7 @@
         <td>
           <%= form_tag student_path, method: :get, class: "form-search" do %>
           <%= label_tag 'Device Search:' %>
-          <%= text_field_tag :q, '',size: 10, class: "input-medium search-query", autofocus: true %>
+          <%= text_field_tag :q, '',size: 10, class: "input-medium search-query" %>
           <%= submit_tag "Search", class: 'btn btn-mini' %>
           <% end %>
 
