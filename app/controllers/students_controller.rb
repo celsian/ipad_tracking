@@ -23,7 +23,10 @@ class StudentsController < ApplicationController
     @devices = @student.devices
     @history = @student.notes
 
+    @total = @student.finance_total
+
     @note = Note.new
+    @finance = Finance.new
 
     @device_search = Device.new
     if params[:q]
