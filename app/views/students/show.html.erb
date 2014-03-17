@@ -1,80 +1,71 @@
 <div class="row">
   <div class="span6">
     <h3><%= @student.first_name %> <%= @student.last_name %> (<%= @student.grade_level %>) ID: <%= @student.id_number %></h3>
-    <P>
-      <table class="table table-striped">
-        <tr>
-          <td>
-            <B>Insurance:</B>
-          </td>
-          <td>
-            <B><%= @student.insurance %></B>
-          </td>
-          <td>
-            <B>Current School:</B>
-          </td>
-          <td>
-            <B><%= @student.current_school %></B>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Parent 1:
-          </td>
-          <td>
-            <%= @student.parent_1_name %>
-          </td>
-          <td>
-            Phone:
-          </td>
-          <td>
-            <%= @student.parent_1_phone %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Parent 2:
-          </td>
-          <td>
-            <%= @student.parent_2_name %>
-          </td>
-          <td>
-            Phone:
-          </td>
-          <td>
-            <%= @student.parent_2_phone %>
-          </td>
-        </tr>
-      </table>
-    </P>
+    <table class="table table-striped">
+      <tr>
+        <td>
+          <B>Insurance:</B>
+        </td>
+        <td>
+          <%= @student.insurance %>
+        </td>
+        <td>
+          <B>Current School:</B>
+        </td>
+        <td>
+          <%= @student.current_school %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <B>Parent 1:</B>
+        </td>
+        <td>
+          <%= @student.parent_1_name %>
+        </td>
+        <td>
+          <B>Phone:</B>
+        </td>
+        <td>
+          <%= @student.parent_1_phone %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <B>Parent 2:</B>
+        </td>
+        <td>
+          <%= @student.parent_2_name %>
+        </td>
+        <td>
+          <B>Phone:</B>
+        </td>
+        <td>
+          <%= @student.parent_2_phone %>
+        </td>
+      </tr>
+    </table>
     <P>
       <%= link_to "Edit Student", edit_student_path(@student) %> | 
       <%= link_to "Delete Student", @student, data: { confirm: "Are you sure you want to permanently delete this student?" }, method: :delete %>
     </P>
-  </div>
-  <div class="span6">
-    <h3>Finance Information:</h3>
-  </div>
-</div>
 
-<div class="row">
-  <div class="span6">
     <table class="table table-striped">
       <tr>
         <td>
           <%= form_tag student_path, method: :get, class: "form-search" do %>
-            <%= label_tag 'Device Search:' %>
-            <%= text_field_tag :q, '',size: 10, class: "input-medium search-query", autofocus: true %>
-            <%= submit_tag "Search", class: 'btn btn-mini' %>
+          <%= label_tag 'Device Search:' %>
+          <%= text_field_tag :q, '',size: 10, class: "input-medium search-query", autofocus: true %>
+          <%= submit_tag "Search", class: 'btn btn-mini' %>
           <% end %>
 
           <% if @devices_search %>
-            <%= @devices_search.length > 0 ? "Results:" : "No Results Found." %>
-            <ul>
-              <% @devices_search.each do |device| %>
-                <li><%= device.device_type %>: <%= link_to "#{device.serial_number}", device_path(device) %> - <%= device.district_tag %> | <%= link_to "Add Device", associate_path(device, student: @student), data: { confirm: "Add #{device.serial_number} #{device.district_tag} to user?" } %></li>
-              <% end %>
-            </ul>
+          <%= @devices_search.length > 0 ? "Results:" : "No Results Found." %>
+          <ul>
+            <% @devices_search.each do |device| %>
+            <li><%= device.device_type %>: <%= link_to "#{device.serial_number}", device_path(device) %> - <%= device.district_tag %> | <%= link_to "Add Device", associate_path(device, student: @student), data: { confirm: "Add #{device.serial_number} #{device.district_tag} to user?" } %></li>
+            <% end %>
+          </ul>
           <% end %>
         </td>
       </tr>
@@ -82,22 +73,95 @@
 
     <H3>Devices:</H3>
     <% if @devices.length > 0 %>
-      <% @devices.each do |device| %>
-        <li><%= device.device_type %>: <%= link_to "#{device.serial_number}", device %> - <%= device.district_tag %> | <%= link_to "Remove Device", deassociate_path(device), data: { confirm: "Remove device from user?" } %> <%= link_to image_tag("meraki.png", :size => "32x32"), meraki_path(serial: device.serial_number), target: "_blank" %></li>
-      <% end %>
+    <% @devices.each do |device| %>
+    <li><%= device.device_type %>: <%= link_to "#{device.serial_number}", device %> - <%= device.district_tag %> | <%= link_to "Remove Device", deassociate_path(device), data: { confirm: "Remove device from user?" } %> <%= link_to image_tag("meraki.png", :size => "32x32"), meraki_path(serial: device.serial_number), target: "_blank" %></li>
+    <% end %>
     <% else %>
-      <li>None</li>
+    <li>None</li>
     <% end %>
   </div>
 
   <div class="span6">
-  <p></p>
-  </div>
-</div>
+    <h3>Finance Information:</h3>
+    <table class="table table-striped">
+      <tr>
+        <td>
+          <B>Date:</B>
+        </td>
+        <td width=70%>
+          <B>Note:</B>
+        </td>
+        <td>
+          <B>Amount:</B>
+        </td>
+      </tr>
+        <% @student.finances.each do |finance| %>
+          <tr>
+            <td>
+              <%= finance.created_at.in_time_zone("Pacific Time (US & Canada)").strftime("%F") %>
+            </td>
+            <td>
+              <%= finance.note %>
+              <% if current_user.id == finance.user_id %>
+                <%= link_to "Delete", finance, data: { confirm: "Are you sure you want to permanently delete this charge/credit for #{finance.amount}?" }, method: :delete %>
+              <% end %>
+            </td>
+            <td>
+              <% if finance.charge == true %>
+                <font color='red'>-<%= number_to_currency(finance.amount) %></font>
+              <% else %>
+                <font color='green'><%= number_to_currency(finance.amount) %></font>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      <tr>
+        <td>
+        </td>
+        <td class="rightCell">
+          Total:
+        </td>
+        <td>
+          <% if @total < 0 %>
+             <font color='red'><%= number_to_currency(@total) %></font>
+          <% else %>
+            <font color='green'><%= number_to_currency(@total) %></font>
+          <% end %>
+        </td>
+      </tr>
+    </table>
 
-<div class="row">
-  <span class="span12"> 
+    <%= form_for @finance do |f| %>
+    <div class="field">
+    <table>
+      <tr>
+        <td class='centerCell'>
+          <div class="btn-group" data-toggle="buttons-radio">
+            <%= f.radio_button :charge,'true', :id=>"Charge", :style=>"display:none;" %>
+            <label for="Charge" class="btn btn-danger">Charge</label>
+            <%= f.radio_button :charge, 'false', :id=>"Credit", :style=>"display:none;" %>
+            <label for="Credit" class="btn btn-success">Credit</label>
+          </div>
+        </td>
+        <td class='centerCell'>
+          <%= f.text_field :note, placeholder: 'Note' %>
+        </td>
+        <td class='centerCell'>
+          <%= f.text_field :amount, placeholder: 'Amount', style: 'width: 60px;' %>
+        </td>
+        <td class='centerCell'>
+          <%= f.submit "Add Transaction", class: 'btn btn-primary'  %>
+        </td>
+      </tr>
+    </table>
+      <%= f.hidden_field :student_id, value: @student.id %>
+      <%= f.hidden_field :user_id, value: @current_user.id %>
+    </div>
+  </div>
+  <% end %>
+
+  <div class="span12"> 
     <%= render "notes/history" %>
     <%= render "notes/add_student" %>
-  </span>
+  </div>
 </div>
