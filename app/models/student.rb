@@ -1,6 +1,7 @@
 class Student < ActiveRecord::Base
   has_many :devices
   has_many :notes
+  has_many :finances
 
   validates :first_name, :last_name, :id_number, :grade_level, :active, presence: true
   validates :id_number, uniqueness: true
@@ -8,7 +9,7 @@ class Student < ActiveRecord::Base
   GRADE_LEVEL = [9, 10, 11, 12]
   INSURANCE = ["Yes", "No"]
 
-  default_scope order("last_name, first_name")
+  default_scope { order("last_name, first_name") }
 
   def title_case
     if self.first_name != "" && self.last_name != ""
@@ -76,5 +77,17 @@ class Student < ActiveRecord::Base
     end #CSV
 
   end #def end.
+
+  def finance_total
+    total = BigDecimal.new(0)
+    finances.each do |finance|
+      if finance.charge == true
+        total -= finance.amount
+      else
+        total += finance.amount
+      end
+    end
+    total
+  end
 
 end
