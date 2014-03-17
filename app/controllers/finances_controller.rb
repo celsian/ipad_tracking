@@ -4,16 +4,24 @@ class FinancesController < ApplicationController
 
     @finance = Finance.new(finance_params)
 
-    if @finance.save
-      if @finance.charge
-        Note.create(student_id: finance_params["student_id"], user_id: finance_params["user_id"], note: "Charge for #{'$%.2f' % finance_params['amount']} with note: '#{finance_params['note']}' was added.")
-      else
-        Note.create(student_id: finance_params["student_id"], user_id: finance_params["user_id"], note: "Credit for #{'$%.2f' % finance_params['amount']} with note: '#{finance_params['note']}' was added.")
-      end
-
-      redirect_to session.delete(:return_to), flash: {success: "Charge was created."}
+    if finance_params['charge'] == nil
+      redirect_to session.delete(:return_to), flash: {error: "Charge was note created. Please select 'Charge' or 'Credit.'"}
     else
-      redirect_to session.delete(:return_to), flash: {error: "Error: Cannot create a blank Charge."}
+      if @finance.save
+        if @finance.charge
+          Note.create(student_id: finance_params["student_id"], user_id: finance_params["user_id"], note: "Charge for #{'$%.2f' % finance_params['amount']} with note: '#{finance_params['note']}' was added.")
+        else
+          Note.create(student_id: finance_params["student_id"], user_id: finance_params["user_id"], note: "Credit for #{'$%.2f' % finance_params['amount']} with note: '#{finance_params['note']}' was added.")
+        end
+
+        redirect_to session.delete(:return_to), flash: {success: "Charge was created."}
+      else
+        formatted_errors = ''
+        @finance.errors.full_messages.each do |message|
+          formatted_errors += message + ". "
+        end
+        redirect_to session.delete(:return_to), flash: {error: "Error: #{formatted_errors}"}
+      end
     end
   end
 
