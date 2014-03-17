@@ -2,7 +2,7 @@
 <%= form_for @note do |f| %>
 
 <div class="field">
-    <%= f.text_field :note, autofocus: true %>
+    <%= f.text_field :note %>
     <%= f.hidden_field :student_id, value: @student.id %>
     <%= f.hidden_field :user_id, value: @current_user.id %>
 
