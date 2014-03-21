@@ -24,6 +24,8 @@
     <%= f.label :parent_2_phone %>
     <%= f.text_field :parent_2_phone %>
     <%= f.label :insurance %><%= f.collection_select :insurance, Student::INSURANCE, :to_s, :to_s, :include_blank => true %>
+    <%= f.label :insurance_expiration %>
+    <%= f.text_field :insurance_expiration %>
     </div>
   </div>
 
