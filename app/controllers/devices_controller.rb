@@ -85,11 +85,12 @@ class DevicesController < ApplicationController
 
     device = Device.find(params[:id])
     student = Student.find(params[:student])
+    user = current_user
 
     if device.student
       redirect_to session.delete(:return_to), flash: {error: "Device #{device.device_type} #{device.serial_number} #{device.district_tag} already has an owner: #{device.student.id_number}"}
     else
-      device.associate(student)
+      device.associate(student, user)
       redirect_to session.delete(:return_to), flash: {success: "Added #{device.device_type} #{device.serial_number} #{device.district_tag} to #{student.id_number}."}
     end
   end
@@ -99,7 +100,8 @@ class DevicesController < ApplicationController
 
     device = Device.find(params[:id])
     student = device.student
-    device.deassociate
+    user = current_user
+    device.deassociate(user)
     
     redirect_to session.delete(:return_to), flash: {success: "Removed #{device.device_type} #{device.serial_number} #{device.district_tag} from user."}
   end

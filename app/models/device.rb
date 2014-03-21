@@ -7,16 +7,16 @@ class Device < ActiveRecord::Base
 
   DEVICES = ["iPad", "MacBook Pro", "MacBook Air"]
 
-  def associate(student)
+  def associate(student, user)
     if self.update_attribute(:student_id, student.id)
-      Note.create(student: student, device: self, note: "Device was added to student.")
+      Note.create(student: student, user: user, device: self, note: "Device was added to student.")
     end
   end
 
-  def deassociate
+  def deassociate(user)
     student = self.student
     if self.update_attribute(:student_id, nil)
-      Note.create(student: student, device: self, note: "Device was removed from student.")
+      Note.create(student: student, user: user, device: self, note: "Device was removed from student.")
     end
   end
 
