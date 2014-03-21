@@ -33,6 +33,7 @@ en:
         parent_2_name: "2nd Parent's Name:"
         parent_2_phone: "2nd Parent's Phone Number:"
         insurance: "Insurance:"
+        insurance_expiration: "Insurance Expiration:"
       device:
         device_type: "Device Type:"
         serial_number: "Serial Number:"
