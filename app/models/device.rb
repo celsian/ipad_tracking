@@ -25,4 +25,12 @@ class Device < ActiveRecord::Base
     where("serial_number LIKE :query OR district_tag LIKE :query", query: "%#{query}%")
   end
 
+  def self.export_serial
+    CSV.generate do |csv|
+      all.each do |device|
+        csv << a=[device.serial_number]
+      end
+    end
+  end
+
 end
