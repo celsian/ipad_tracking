@@ -14,6 +14,11 @@ class DevicesController < ApplicationController
       @last = ((@devices.all.length/20)+1).to_i
       @devices = @devices[(@page-1)*20..((@page-1)*20+19)]
     end
+
+    respond_to do |format|
+      format.html
+      format.csv { render text: Device.export_serial }
+    end
   end
 
   def show
