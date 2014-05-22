@@ -11,6 +11,9 @@ class DevicesController < ApplicationController
     @search = params[:q]
     if params[:q]
       @devices = Device.search params[:q]
+      if @devices.length == 1
+        redirect_to device_path(@devices.first) and return
+      end
       @last = ((@devices.all.length/20)+1).to_i
       @devices = @devices[(@page-1)*20..((@page-1)*20+19)]
     end
