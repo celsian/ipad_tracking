@@ -14,7 +14,7 @@ class StudentsController < ApplicationController
     if params[:q]
       @students = (Student.search params[:q])
       if @students.length == 1
-        redirect_to device_path(@students.first) and return
+        redirect_to student_path(@students.first) and return
       end
       @last = ((@students.all.length/20)+1).to_i
       @students = @students[(@page-1)*20..((@page-1)*20+19)]
