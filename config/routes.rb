@@ -11,6 +11,10 @@ IpadTracking::Application.routes.draw do
 
   get "/deassociate/:id", to: "devices#deassociate", as: "deassociate"
   get "/associate/:id", to: "devices#associate", as: "associate"
+
+  get "/device/:id/check_in", to: "devices#check_in", as: "device_check_in"
+  get "/device/:id/check_out", to: "devices#check_out", as: "device_check_out"
+
   post "/admin/import_all_submit", to: "admins#import_all_submit", as: "import_all_submit"
   get "/admin/import_all", to: "admins#import_all", as: "import_all"
   get "/admin/edit_admins", to: "admins#edit_admins", as: "edit_admins"
