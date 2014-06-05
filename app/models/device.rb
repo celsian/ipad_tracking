@@ -9,14 +9,18 @@ class Device < ActiveRecord::Base
 
   def associate(student, user)
     if self.update_attribute(:student_id, student.id)
+      self.checked_in = false
       Note.create(student: student, user: user, device: self, note: "Device was added to student.")
+      self.save
     end
   end
 
   def deassociate(user)
     student = self.student
     if self.update_attribute(:student_id, nil)
+      self.checked_in = true
       Note.create(student: student, user: user, device: self, note: "Device was removed from student.")
+      self.save
     end
   end
 
@@ -34,3 +38,17 @@ class Device < ActiveRecord::Base
   end
 
 end
+
+
+
+# CODE FOR STUDENT SHOW PAGE REGARDING DEVICE CHECK IN/CHECKOUT
+#----------------------------------------------------------------
+# <%= form_for @finance do |f| %>
+#   <div class="btn-group" data-toggle="buttons-radio">
+
+#     <%= f.radio_button :charge, 'false', id: "Credit", style: "display:none;" %>
+#     <label for="Credit" class="btn btn-mini btn-success">Check Out</label>
+#   </div>
+#   <%= f.text_field :note, placeholder: 'Note', style: 'font-size: 11px; height: 12px; width: 60px; vertical-align: top;' %>
+#   <%= f.submit "Go", class: 'btn btn-mini btn-primary'  %>
+# <% end %>
