@@ -73,9 +73,54 @@
 
     <H3>Devices:</H3>
     <% if @devices.length > 0 %>
-    <% @devices.each do |device| %>
-    <li><%= device.device_type %>: <%= link_to "#{device.serial_number}", device %> - <%= device.district_tag %> | <%= link_to "Remove Device", deassociate_path(device), data: { confirm: "Remove device from user?" } %> <%= link_to image_tag("meraki.png", :size => "32x32"), meraki_path(serial: device.serial_number), target: "_blank" %></li>
-    <% end %>
+      <table class="table table-striped" border=0>
+        <tr>
+          <th>
+            Type
+          </th>
+          <th>
+            Serial
+          </th>
+          <th>
+            Tag
+          </th>
+          <th>
+            Check In/Out
+          </th>
+          <th>
+            Meraki
+          </th>
+          <th>
+            Remove
+          </th>
+        </tr>
+        <% @devices.each do |device| %>
+          <tr>
+            <td class="centerContents">
+              <%= device.device_type %>
+            </td>
+            <td>
+              <%= link_to "#{device.serial_number}", device %>
+            </td>
+            <td>
+              <%= device.district_tag %>
+            </td>
+            <td class="centerContents">
+              <% if device.checked_in == true || device.checked_in == nil %>
+                <%= link_to "Check Out", device_check_out_path(device), class: "btn btn-small btn-success"  %>
+              <% elsif device.checked_in == false %>
+                <%= link_to "Check In", device_check_in_path(device), class: "btn btn-small btn-danger"  %>
+              <% end %>
+            </td>
+            <td class="centerContents">
+              <%= link_to image_tag("meraki.png", :size => "32x32"), meraki_path(serial: device.serial_number), target: "_blank" %>
+            </td>
+            <td class="centerContents">
+              <%= link_to "X", deassociate_path(device), class: "btn btn-mini btn-danger" , data: { confirm: "Remove device from user?" } %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
     <% else %>
     <li>None</li>
     <% end %>
@@ -165,3 +210,4 @@
     <%= render "notes/add_student" %>
   </div>
 </div>
+
