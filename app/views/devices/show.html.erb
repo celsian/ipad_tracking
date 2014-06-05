@@ -2,15 +2,15 @@
 <%= link_to "Edit", edit_device_path(@device), data: { confirm: "Are you sure you want to EDIT this device?" } %> - <%= link_to "Permanently Delete", @device, data: { confirm: "Are you sure you want to PERMANENTLY DELETE this device?" }, method: :delete %><br>
 <b>Serial Number:</b> <%= "#{@device.serial_number}" %> <%= link_to image_tag("meraki.png", :size => "32x32"), meraki_path(serial: @device.serial_number), target: "_blank" %><br>
 <b>District Tag:</b> <%= "#{@device.district_tag}" %><br>
-<b>Current User:</b>
-<% if @device.student %>
-  <%= render "students/student", student: @device.student %> - <%= link_to "Remove", deassociate_path(@device), data: { confirm: "Remove device from user?" } %><br>
-  <b>Status:</b>
+<b>Status:</b>
   <% if @device.checked_in || @device.checked_in == nil %>
     <FONT COLOR="Green">Checked In</FONT>
   <% else %>
-    <FONT COLOR="Red">Chcked Out</FONT>
+    <FONT COLOR="Red">Checked Out</FONT>
   <% end %><br>
+<b>Current User:</b>
+<% if @device.student %>
+  <%= render "students/student", student: @device.student %> - <%= link_to "Remove", deassociate_path(@device), data: { confirm: "Remove device from user?" } %>
   <br>
   <br>
 <% else %>
