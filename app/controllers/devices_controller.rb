@@ -75,6 +75,26 @@ class DevicesController < ApplicationController
     redirect_to url
   end
 
+  def check_out
+    session[:return_to] ||= request.referer
+
+    @device = Device.find(params[:id])
+    @device.checked_in = false
+    @device.save
+
+    redirect_to session.delete(:return_to), flash: {success: "Device checked out." }  
+  end
+
+  def check_in
+    session[:return_to] ||= request.referer
+
+    @device = Device.find(params[:id])
+    @device.checked_in = true
+    @device.save
+
+    redirect_to session.delete(:return_to), flash: {success: "Device checked in." }
+  end
+
   def destroy
     Device.find(params[:id]).destroy
     
