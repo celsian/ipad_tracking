@@ -107,9 +107,9 @@
             </td>
             <td class="centerContents">
               <% if device.checked_in == true || device.checked_in == nil %>
-                <%= link_to "Check Out", device_check_out_path(device), class: "btn btn-small btn-success"  %>
+                <%= link_to "Check Out", device_check_out_path(device), class: "btn btn-small btn-danger"  %>
               <% elsif device.checked_in == false %>
-                <%= link_to "Check In", device_check_in_path(device), class: "btn btn-small btn-danger"  %>
+                <%= link_to "Check In", device_check_in_path(device), class: "btn btn-small btn-success"  %>
               <% end %>
             </td>
             <td class="centerContents">

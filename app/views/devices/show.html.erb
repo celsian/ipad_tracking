@@ -4,9 +4,9 @@
 <b>District Tag:</b> <%= "#{@device.district_tag}" %><br>
 <b>Status:</b>
   <% if @device.checked_in || @device.checked_in == nil %>
-    <FONT COLOR="Green">Checked In</FONT>
+    <FONT COLOR="Green">Checked In</FONT> <%= link_to "Check Out", device_check_out_path(@device), class: "btn btn-mini btn-danger"  %>
   <% else %>
-    <FONT COLOR="Red">Checked Out</FONT>
+    <FONT COLOR="Red">Checked Out</FONT> <%= link_to "Check In", device_check_in_path(@device), class: "btn btn-mini btn-success"  %>
   <% end %><br>
 <b>Current User:</b>
 <% if @device.student %>
