@@ -4,7 +4,13 @@
 <b>District Tag:</b> <%= "#{@device.district_tag}" %><br>
 <b>Current User:</b>
 <% if @device.student %>
-  <%= render "students/student", student: @device.student %> - <%= link_to "Remove", deassociate_path(@device), data: { confirm: "Remove device from user?" } %>
+  <%= render "students/student", student: @device.student %> - <%= link_to "Remove", deassociate_path(@device), data: { confirm: "Remove device from user?" } %><br>
+  <b>Status:</b>
+  <% if @device.checked_in || @device.checked_in == nil %>
+    <FONT COLOR="Green">Checked In</FONT>
+  <% else %>
+    <FONT COLOR="Red">Chcked Out</FONT>
+  <% end %><br>
   <br>
   <br>
 <% else %>
