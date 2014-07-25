@@ -8,6 +8,8 @@ Devise.setup do |config|
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
 
+  config.secret_key = '06d6418db1b7344084bc261fe6af73bc2596f5c0d9cdbb09ad391b951738b65d78ff68e980783132b6ea4ff86244da5ed180335dd56e1e6a2db2884a3a4ffc13'
+
   config.secret_key = ENV['SECRET_KEY'] if Rails.env == 'production'
 
   # ==> ORM configuration
