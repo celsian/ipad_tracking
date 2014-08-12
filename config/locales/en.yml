@@ -26,13 +26,17 @@ en:
       student:
         first_name: "First Name:"
         last_name: "Last Name:"
+        email: "Student E-Mail:"
+        home_phone: "Home Phone:"
         id_number: "ID Number:"
         current_school: "Current School:"
         parent_1_name: "1st Parent's Name:"
         parent_1_phone: "1st Parent's Phone Number:"
+        parent_1_email: "1st Parent's E-Mail:"
         parent_2_name: "2nd Parent's Name:"
         parent_2_phone: "2nd Parent's Phone Number:"
-        insurance: "Insurance:"
+        parent_2_email: "2nd Parent's E-Mail:"
+        policy_number: "Policy Number:"
         insurance_expiration: "Insurance Expiration:"
       device:
         device_type: "Device Type:"
