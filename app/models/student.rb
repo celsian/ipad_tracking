@@ -48,7 +48,6 @@ class Student < ActiveRecord::Base
   end
 
   def self.import_all(file)
-    # binding.pry
     CSV.foreach(file.path, headers: true) do |row|
 
       student = find_by(id_number: row["id_number"]) || Student.new
@@ -60,20 +59,28 @@ class Student < ActiveRecord::Base
       student.parent_1_name = parent_1_name
       student.parent_2_name = parent_2_name
 
+      if ["9", "10", "11", "12"].include?(student.grade_level.to_s)
+        student.active = true
+      else
+        student.active = false
+      end
+
       device = Device.find_by(serial_number: row["serial_number"]) || Device.new
       device.attributes = row.to_hash.slice("device_type", "serial_number", "district_tag")
 
       if device.save
-        Note.create(device: device, note: "Device was imported/updated.")
+        # Note.create(device: device, note: "Device was imported/updated.")
       end
 
       if student.save
-        Note.create(student: student, note: "Student was imported/updated.")
+        # Note.create(student: student, note: "Student was imported/updated.")
 
-        note = Note.new
-        note.attributes = row.to_hash.slice("note")
-        note.student = student
-        note.save
+        if row.to_hash.slice("note")
+          note = Note.new
+          note.attributes = row.to_hash.slice("note")
+          note.student = student
+          note.save
+        end
 
         if device.save
           device.associate(student, nil)
