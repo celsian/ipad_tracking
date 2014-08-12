@@ -4,10 +4,24 @@
     <table class="table table-striped">
       <tr>
         <td>
+          <B>E-Mail:</B>
+        </td>
+        <td>
+          <%= @student.email %>
+        </td>
+        <td>
+          <B>Home Phone:</B>
+        </td>
+        <td>
+          <%= @student.home_phone %>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <B>Insurance:</B>
         </td>
         <td>
-          <%= @student.insurance %> - <%= @student.insurance_expiration %>
+          <%= @student.policy_number %> - <%= @student.insurance_expiration %>
         </td>
         <td>
           <B>Current School:</B>
@@ -42,6 +56,20 @@
         </td>
         <td>
           <%= @student.parent_2_phone %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <B>Parent 1 Email:</B>
+        </td>
+        <td>
+          <%= @student.parent_1_email %>
+        </td>
+        <td>
+          <B>Parent 2 Email:</B>
+        </td>
+        <td>
+          <%= @student.parent_2_email %>
         </td>
       </tr>
     </table>
