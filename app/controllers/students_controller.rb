@@ -87,7 +87,7 @@ class StudentsController < ApplicationController
   def student_params
     params.require(:student).permit(:first_name, :last_name, :id_number, :grade_level, :insurance, :insurance_expiration, 
                                     :current_school, :parent_1_name, :parent_1_phone, :parent_2_name,
-                                    :parent_2_phone)
+                                    :parent_2_phone, :parent_1_email, :parent_2_email, :email, :home_phone, :policy_number)
   end
 
   def require_admin
