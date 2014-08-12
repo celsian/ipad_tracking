@@ -52,7 +52,13 @@ class Student < ActiveRecord::Base
     CSV.foreach(file.path, headers: true) do |row|
 
       student = find_by(id_number: row["id_number"]) || Student.new
-      student.attributes = row.to_hash.slice("id_number", "grade_level", "first_name", "last_name")
+      parent_1_name = (row["parent_1_first"] || "") + " " + (row["parent_1_last"] || "")
+      parent_2_name = (row["parent_2_first"] || "") + " " + (row["parent_2_last"] || "")
+
+      student.attributes = row.to_hash.slice("id_number", "grade_level", "first_name", "last_name", "email", "home_phone", "current_school", "parent_1_phone", "parent_2_phone",
+        "parent_1_email", "parent_2_email", "policy_number", "insurance_expiration")
+      student.parent_1_name = parent_1_name
+      student.parent_2_name = parent_2_name
 
       device = Device.find_by(serial_number: row["serial_number"]) || Device.new
       device.attributes = row.to_hash.slice("device_type", "serial_number", "district_tag")
@@ -70,7 +76,7 @@ class Student < ActiveRecord::Base
         note.save
 
         if device.save
-          device.associate(student)
+          device.associate(student, nil)
         end
       end #if student.save
 
