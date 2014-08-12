@@ -1,7 +1,11 @@
 <h3>Import Students & Devices:</h3>
 - This tool allows you to import Students, Devices or Both.<br>
 - Uploads must be in <b>.CSV</b> format and fields must use the following field headers:<br>
-- <b><font color="red">last_name | first_name | grade_level | id_number |</font><font color="blue"> serial_number | district_tag | device_type |</font><font color="green"> note</font></b><br>
+- Valid Student fields are: <b><font color="red">id_number | grade_level | first_name | last_name | email | home_phone | current_school | parent_1_first | parent_1_last | parent_2_first | parent_2_last | parent_1_phone | parent_2_phone |
+        parent_1_email | parent_2_email | policy_number | insurance_expiration |</font></b>
+<br>- Valid Device fields are: <b><font color="blue"> serial_number | district_tag | device_type |</font></b><br>
+    - Valid Note fields are: <b><font color="green"> note</font></b><br>
+    <br>
 <ul>
   <li>To import <b><font color="red">Students</font></b> you must include all <b><font color="red">Red</font></b> fields.</li>
   <li>To import <b><font color="blue">Devices</font></b> you must include all <b><font color="blue">Blue</font></b> fields.</li>
@@ -14,3 +18,4 @@
   <%= file_field_tag :file %><br>
   <%= submit_tag "Import" %>
 <% end %>
+<H4><B><font color="red">ALERT:</font> Once you press "Import" the website will seemingly hang. Do not navigate away from this page until you see "Students & Devices imported." The larger your file the longer the import will take.</B></H4>
