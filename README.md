@@ -3,7 +3,7 @@ Device Tracking
 
 App currently available for testing: http://device-tracking.herokuapp.com/
 
-Pre-Created Admin Account: 
+Pre-Created Admin Account:
 Username: me@example.com 
 Password: testpassword 
 
