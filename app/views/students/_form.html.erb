@@ -10,6 +10,10 @@
     <%= f.text_field :id_number %>
     <%= f.label :grade_level %>
     <%= f.collection_select :grade_level, Student::GRADE_LEVEL, :to_i, :to_i, :include_blank => false %>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+    <%= f.label :home_phone %>
+    <%= f.text_field :home_phone %>
     </div>
     <div class="span4">
     <P><B>Optional:</B></P>
@@ -19,11 +23,16 @@
     <%= f.text_field :parent_1_name %>
     <%= f.label :parent_1_phone %>
     <%= f.text_field :parent_1_phone %>
+    <%= f.label :parent_1_email %>
+    <%= f.text_field :parent_1_email %>
     <%= f.label :parent_2_name %>
     <%= f.text_field :parent_2_name %>
     <%= f.label :parent_2_phone %>
     <%= f.text_field :parent_2_phone %>
-    <%= f.label :insurance %><%= f.collection_select :insurance, Student::INSURANCE, :to_s, :to_s, :include_blank => true %>
+    <%= f.label :parent_2_email %>
+    <%= f.text_field :parent_2_email %>
+    <%= f.label :policy_number %>
+    <%= f.text_field :policy_number %>
     <%= f.label :insurance_expiration %>
     <%= f.text_field :insurance_expiration %>
     </div>
