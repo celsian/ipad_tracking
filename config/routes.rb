@@ -21,6 +21,7 @@ IpadTracking::Application.routes.draw do
   post "/admin/update_admins", to: "admins#update_admins", as: "update_admins"
   get "/admin", to: "admins#index", as: "administrator"
   get "/admin/logs", to: "admins#logs", as: "admin_logs"
+  get "/admin/export_students", to: "admins#export_students", as: "admin_export_students"
 
   
 
