@@ -21,6 +21,10 @@ class AdminsController < ApplicationController
     redirect_to root_path, flash: {success: "Students & Devices imported."}
   end
 
+  def export_students
+    
+  end
+
   def update_admins
     User.disable_all_admins
     User.update_admins(params, current_user)
