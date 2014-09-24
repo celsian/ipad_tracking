@@ -37,6 +37,15 @@ class Device < ActiveRecord::Base
     end
   end
 
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names.delete_if{ |header| header == "id" || header == "student_id" || header == "created_at" || header == "updated_at" } #removes headers I don't want, there is likely a better way.
+      all.each do |device|
+        csv << device.attributes.values_at(*column_names)
+      end
+    end
+  end
+
 end
 
 
