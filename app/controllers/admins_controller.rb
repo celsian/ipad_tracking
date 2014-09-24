@@ -21,6 +21,13 @@ class AdminsController < ApplicationController
     redirect_to root_path, flash: {success: "Students & Devices imported."}
   end
 
+  def export_devices
+    respond_to do |format|
+      format.csv { send_data Device.all.to_csv }
+    end
+    #How do I flash a notice after this action responds? Probably need Javascript because theres no page reload.
+  end
+
   def export_students
     
   end
@@ -40,4 +47,7 @@ class AdminsController < ApplicationController
     end
   end
 
+  def student_export_params
+    params.require(:student).permit(:grade_level)
+  end
 end
