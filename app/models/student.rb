@@ -48,14 +48,14 @@ class Student < ActiveRecord::Base
   end
 
   def self.import_all(file)
-    CSV.foreach(file.path, headers: true) do |row|
+    CSV.foreach(file.path, headers: true, header_converters: :symbol) do |row|
 
-      student = find_by(id_number: row["id_number"]) || Student.new
-      parent_1_name = (row["parent_1_first"] || "") + " " + (row["parent_1_last"] || "")
-      parent_2_name = (row["parent_2_first"] || "") + " " + (row["parent_2_last"] || "")
+      student = find_by(id_number: row[:id_number]) || Student.new
+      parent_1_name = (row[:parent_1_first] || "") + " " + (row[:parent_1_last] || "")
+      parent_2_name = (row[:parent_2_first] || "") + " " + (row[:parent_2_last] || "")
 
-      student.attributes = row.to_hash.slice("id_number", "grade_level", "first_name", "last_name", "email", "home_phone", "current_school", "parent_1_phone", "parent_2_phone",
-        "parent_1_email", "parent_2_email", "policy_number", "insurance_expiration")
+      student.attributes = row.to_hash.slice(:id_number, :grade_level, :first_name, :last_name, :email, :home_phone, :current_school, :parent_1_phone, :parent_2_phone,
+        :parent_1_email, :parent_2_email, :policy_number, :insurance_expiration)
       student.parent_1_name = parent_1_name
       student.parent_2_name = parent_2_name
 
@@ -65,19 +65,20 @@ class Student < ActiveRecord::Base
         student.active = false
       end
 
-      device = Device.find_by(serial_number: row["serial_number"]) || Device.new
-      device.attributes = row.to_hash.slice("device_type", "serial_number", "district_tag")
+      device = Device.find_by(serial_number: row[:serial_number]) || Device.new
 
-      if device.save
+      device.attributes = row.to_hash.slice(:device_type, :serial_number, :district_tag)
+
+      if device.save!
         # Note.create(device: device, note: "Device was imported/updated.")
       end
 
       if student.save
         # Note.create(student: student, note: "Student was imported/updated.")
 
-        if row.to_hash.slice("note")
+        if row.to_hash.slice(:note)
           note = Note.new
-          note.attributes = row.to_hash.slice("note")
+          note.attributes = row.to_hash.slice(:note)
           note.student = student
           note.save
         end

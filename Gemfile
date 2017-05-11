@@ -13,10 +13,7 @@ gem "pg"
 gem 'devise'
 gem "twitter-bootstrap-rails"
 
-gem 'rails_12factor', group: :production
-
 gem 'pry-rails'
-
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
