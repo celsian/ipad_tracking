@@ -5,7 +5,7 @@ class Device < ActiveRecord::Base
   validates :serial_number, :district_tag, uniqueness: true
   validates :device_type, :serial_number, :district_tag, presence: true
 
-  DEVICES = ["iPad Air 2", "iPad Air", "iPad 4", "iPad 3", "MacBook Pro", "MacBook Air"]
+  DEVICES = ["iPad Pro", "iPad Air 2", "iPad Air", "iPad 4", "iPad 3", "MacBook Pro", "MacBook Air"]
 
   def associate(student, user)
     if self.update_attribute(:student_id, student.id)
