@@ -1,9 +1,10 @@
 <h1>Device List:</h1>
 <%= link_to "New Device", new_device_path %>
-<%= form_tag devices_path, :method => :get, :class => "form-search" do %>
-  <%= text_field_tag :q, '',size: 10, autofocus: true %>
-  <%= submit_tag "Search", class: 'btn btn-mini' %>
+<%= form_tag devices_path, :method => :get, :class => "form-inline" do %>
+  <%= text_field_tag :q, '',size: 30, autofocus: true, class: "form-control" %>
+  <%= submit_tag "Search", class: 'btn btn-primary btn-sm' %>
 <% end %>
+<br>
 <ul>
 <% @devices.each do |device| %>
   <li><%= render "device", device: device %></li>

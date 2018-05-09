@@ -2,7 +2,7 @@
 <%= form_for @note do |f| %>
 
 <div class="field">
-    <%= f.text_field :note, autofocus: true %>
+    <%= f.text_field :note, class: "form-control", autofocus: true, style: "width: 300px;" %><br>
     <%= f.hidden_field :device_id, value: @device.id %>
     <%= f.hidden_field :user_id, value: @current_user.id %>
     <% if @device.student %>

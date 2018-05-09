@@ -16,9 +16,9 @@
 <% else %>
   None.<br>
   <br>
-  <%= form_tag device_path, method: :get, class: "form-search" do %>
+  <%= form_tag device_path, method: :get, class: "form-inline" do %>
     <%= label_tag 'Student Search:' %>
-    <%= text_field_tag :q, '',size: 10, class: "input-medium search-query", autofocus: true %>
+    <%= text_field_tag :q, '',size: 10, class: "form-control", autofocus: true %>
     <%= submit_tag "Search", class: 'btn btn-mini' %>
   <% end %>
 

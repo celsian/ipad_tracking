@@ -2,8 +2,8 @@
 <%= form_for @note do |f| %>
 
 <div class="field">
-    <%= f.text_field :note %>
-    <%= f.hidden_field :student_id, value: @student.id %>
+    <%= f.text_field :note, class: "form-control", style: 'width: 300px' %>
+    <%= f.hidden_field :student_id, value: @student.id %><br>
     <%= f.hidden_field :user_id, value: @current_user.id %>
 
 </div>

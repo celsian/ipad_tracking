@@ -1,40 +1,40 @@
-<%= form_for @student do |f| %>
+<%= form_for @student, class: "form-control" do |f| %>
   <div class="row">
-    <div class="span4">
+    <div class="col-md-4">
     <P><B>Required:</B></P>
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name, autofocus: true %>
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name %>
-    <%= f.label :id_number %>
-    <%= f.text_field :id_number %>
-    <%= f.label :grade_level %>
-    <%= f.collection_select :grade_level, Student::GRADE_LEVEL, :to_i, :to_i, :include_blank => false %>
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-    <%= f.label :home_phone %>
-    <%= f.text_field :home_phone %>
+    <%= f.label :first_name, class: "form-label" %>
+    <%= f.text_field :first_name, autofocus: true, class: "form-control" %><br>
+    <%= f.label :last_name, class: "form-label" %>
+    <%= f.text_field :last_name, class: "form-control" %><br>
+    <%= f.label :id_number, class: "form-label" %>
+    <%= f.text_field :id_number, class: "form-control" %><br>
+    <%= f.label :grade_level, class: "form-label" %>
+    <%= f.collection_select(:grade_level, Student::GRADE_LEVEL, :to_i, :to_i, {:include_blank => false}, {class: 'form-control'}) %><br>
+    <%= f.label :email, class: "form-label" %>
+    <%= f.text_field :email, class: "form-control" %><br>
     </div>
-    <div class="span4">
+    <div class="col-md-4">
     <P><B>Optional:</B></P>
-    <%= f.label :current_school %>
-    <%= f.text_field :current_school %>
-    <%= f.label :parent_1_name %>
-    <%= f.text_field :parent_1_name %>
-    <%= f.label :parent_1_phone %>
-    <%= f.text_field :parent_1_phone %>
-    <%= f.label :parent_1_email %>
-    <%= f.text_field :parent_1_email %>
-    <%= f.label :parent_2_name %>
-    <%= f.text_field :parent_2_name %>
-    <%= f.label :parent_2_phone %>
-    <%= f.text_field :parent_2_phone %>
-    <%= f.label :parent_2_email %>
-    <%= f.text_field :parent_2_email %>
-    <%= f.label :policy_number %>
-    <%= f.text_field :policy_number %>
-    <%= f.label :insurance_expiration %>
-    <%= f.text_field :insurance_expiration %>
+    <%= f.label :current_school, class: "form-label" %>
+    <%= f.text_field :current_school, class: "form-control" %><br>
+        <%= f.label :home_phone, class: "form-label" %>
+    <%= f.text_field :home_phone, class: "form-control" %><br>
+    <%= f.label :parent_1_name, class: "form-label" %>
+    <%= f.text_field :parent_1_name, class: "form-control" %><br>
+    <%= f.label :parent_1_phone, class: "form-label" %>
+    <%= f.text_field :parent_1_phone, class: "form-control" %><br>
+    <%= f.label :parent_1_email, class: "form-label" %>
+    <%= f.text_field :parent_1_email, class: "form-control" %><br>
+    <%= f.label :parent_2_name, class: "form-label" %>
+    <%= f.text_field :parent_2_name, class: "form-control" %><br>
+    <%= f.label :parent_2_phone, class: "form-label" %>
+    <%= f.text_field :parent_2_phone, class: "form-control" %><br>
+    <%= f.label :parent_2_email, class: "form-label" %>
+    <%= f.text_field :parent_2_email, class: "form-control" %><br>
+    <%= f.label :policy_number, class: "form-label" %>
+    <%= f.text_field :policy_number, class: "form-control" %><br>
+    <%= f.label :insurance_expiration, class: "form-label" %>
+    <%= f.text_field :insurance_expiration, class: "form-control" %><br>
     </div>
   </div>
 

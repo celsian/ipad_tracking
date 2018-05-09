@@ -1,14 +1,14 @@
 <h1>New Device:</h1>
-<%= form_for @device do |f| %>
+<div class="form-group">
+<%= form_for @device, class: "form-control" do |f| %>
 
-<div class="field">
-    <%= f.label :device_type %>
-    <%= f.collection_select :device_type, Device::DEVICES, :to_s, :to_s, :include_blank => false %>
-    <%= f.label :serial_number %>
-    <%= f.text_field :serial_number %>
-    <%= f.label :district_tag %>
-    <%= f.text_field :district_tag %>
-</div>
+<div class="col-md-4">
+    <%= f.label :device_type, class: "control-label" %>
+    <%= f.collection_select(:device_type, Device::DEVICES, :to_s, :to_s, {:include_blank => false}, {class: 'form-control'}) %><br>
+    <%= f.label :serial_number, class: "form-label" %>
+    <%= f.text_field :serial_number, class: "form-control" %><br>
+    <%= f.label :district_tag, class: "form-label" %>
+    <%= f.text_field :district_tag, class: "form-control" %><br>
 
 <div id="error_explanation">
     <% if @device.errors.any? %>
@@ -18,3 +18,6 @@
 
   <%= f.submit class: 'btn btn-primary'  %>
 <% end %>
+
+</div>
+</div>

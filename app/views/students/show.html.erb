@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="span6">
+  <div class="col-md-6">
     <h3><%= @student.first_name %> <%= @student.last_name %> (<%= @student.grade_level %>) ID: <%= @student.id_number %></h3>
     <table class="table table-striped">
       <tr>
@@ -74,16 +74,16 @@
       </tr>
     </table>
     <P>
-      <%= link_to "Edit Student", edit_student_path(@student) %> | 
+      <%= link_to "Edit Student", edit_student_path(@student) %> |
       <%= link_to "Delete Student", @student, data: { confirm: "Are you sure you want to permanently delete this student?" }, method: :delete %>
     </P>
 
     <table class="table table-striped">
       <tr>
         <td>
-          <%= form_tag student_path, method: :get, class: "form-search" do %>
+          <%= form_tag student_path, method: :get, class: "form-inline" do %>
           <%= label_tag 'Device Search:' %>
-          <%= text_field_tag :q, '',size: 10, class: "input-medium search-query" %>
+          <%= text_field_tag :q, '',size: 10, class: "form-control inline" %>
           <%= submit_tag "Search", class: 'btn btn-mini' %>
           <% end %>
 
@@ -116,9 +116,6 @@
             Check In/Out
           </th>
           <th>
-            Meraki
-          </th>
-          <th>
             Remove
           </th>
         </tr>
@@ -141,9 +138,6 @@
               <% end %>
             </td>
             <td class="centerContents">
-              <%= link_to image_tag("meraki.png", :size => "32x32"), meraki_path(serial: device.serial_number), target: "_blank" %>
-            </td>
-            <td class="centerContents">
               <%= link_to "X", deassociate_path(device), class: "btn btn-mini btn-danger" , data: { confirm: "Remove device from user?" } %>
             </td>
           </tr>
@@ -154,7 +148,7 @@
     <% end %>
   </div>
 
-  <div class="span6">
+  <div class="col-md-6">
     <h3>Finance Information:</h3>
     <table class="table table-striped">
       <tr>
@@ -209,18 +203,18 @@
     <table>
       <tr>
         <td class='centerCell'>
-          <div class="btn-group" data-toggle="buttons-radio">
-            <%= f.radio_button :charge,'true', :id=>"Charge", :style=>"display:none;" %>
+          <div class="btn-group">
+            <%= f.radio_button :charge, 'true', :id=>"Charge", :style=>"display:none;" %>
             <label for="Charge" class="btn btn-danger">Charge</label>
             <%= f.radio_button :charge, 'false', :id=>"Credit", :style=>"display:none;" %>
             <label for="Credit" class="btn btn-success">Credit</label>
           </div>
         </td>
         <td class='centerCell'>
-          <%= f.text_field :note, placeholder: 'Note' %>
+          <%= f.text_field :note, class: "form-control", placeholder: 'Note' %>
         </td>
         <td class='centerCell'>
-          <%= f.text_field :amount, placeholder: 'Amount', style: 'width: 60px;' %>
+          <%= f.text_field :amount, class: "form-control", placeholder: 'Amount', style: 'width: 80px;' %>
         </td>
         <td class='centerCell'>
           <%= f.submit "Add Transaction", class: 'btn btn-primary'  %>
@@ -233,7 +227,7 @@
   </div>
   <% end %>
 
-  <div class="span12"> 
+  <div class="col-md-12">
     <%= render "notes/history" %>
     <%= render "notes/add_student" %>
   </div>
