@@ -5,7 +5,7 @@ class FinancesController < ApplicationController
     @finance = Finance.new(finance_params)
 
     if finance_params['charge'] == nil
-      redirect_to session.delete(:return_to), flash: {error: "Charge was note created. Please select 'Charge' or 'Credit.'"}
+      redirect_to session.delete(:return_to), flash: {error: "No change occurred. Please select 'Charge' or 'Credit.'"}
     else
       if @finance.save
         if @finance.charge
@@ -40,7 +40,7 @@ class FinancesController < ApplicationController
 
     Note.create(student_id: finance.student_id, user_id: finance.user_id, note: "#{charge_or_credit} for #{'$%.2f' % finance.amount} with note: '#{finance.note}' was removed.")
     finance.destroy
-    
+
     redirect_to session.delete(:return_to), flash: {success: "Charge/credit was removed."}
   end
 
