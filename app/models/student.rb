@@ -3,7 +3,7 @@ class Student < ActiveRecord::Base
   has_many :notes
   has_many :finances
 
-  validates :first_name, :last_name, :id_number, :grade_level, :active, presence: true
+  validates :first_name, :last_name, :id_number, :grade_level, presence: true
   validates :id_number, uniqueness: true
 
   GRADE_LEVEL = [9, 10, 11, 12]
