@@ -69,10 +69,6 @@ class Student < ActiveRecord::Base
 
       device.attributes = row.to_hash.slice(:device_type, :serial_number, :district_tag)
 
-      if device.save!
-        # Note.create(device: device, note: "Device was imported/updated.")
-      end
-
       if student.save
         # Note.create(student: student, note: "Student was imported/updated.")
 
