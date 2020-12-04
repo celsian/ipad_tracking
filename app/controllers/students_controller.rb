@@ -6,7 +6,7 @@ class StudentsController < ApplicationController
 
   def index #links will go 0, 20, 40, 60...
     @page = (params[:page] || 1).to_i
-    @students = Student.all[(@page-1)*20..((@page-1)*20+19)]
+    @students = Student.where(active: true)[(@page-1)*20..((@page-1)*20+19)]
     @last = ((Student.all.length/20)+1).to_i
 
     @student_search = Student.new
