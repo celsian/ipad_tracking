@@ -37,7 +37,7 @@ class AdminsController < ApplicationController
          csvLine << d.serial_number
          csvLine << d.district_tag
       end
-      exportArray << csvLine
+      exportArray << csvLine.to_csv
     end
     
     respond_to do |format|
