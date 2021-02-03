@@ -22,7 +22,7 @@ IpadTracking::Application.routes.draw do
   get "/admin", to: "admins#index", as: "administrator"
   get "/admin/logs", to: "admins#logs", as: "admin_logs"
   get "/admin/export_students", to: "admins#export_students", as: "admin_export_students"
-  get "/admin/deviecs_export", to: "admins#export_devices", as: "admin_export_devices"
+  get "/admin/devices_export", to: "admins#export_devices", as: "admin_export_devices"
 
   
 
