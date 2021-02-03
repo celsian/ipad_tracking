@@ -29,19 +29,21 @@ class AdminsController < ApplicationController
   end
 
   def export_students
-    exportArray = []
-    Student.where(active: true).each do |s|
-      csvLine = [s.first_name, s.last_name, s.id_number, s.email]
-      s.devices.each do |d|
-         csvLine << d.device_type
-         csvLine << d.serial_number
-         csvLine << d.district_tag
+    csvString = CSV.generate do |csv|
+      Student.where(active: true).each do |s|
+        csvLine = [s.first_name, s.last_name, s.id_number, s.email]
+        s.devices.each do |d|
+           csvLine << d.device_type
+           csvLine << d.serial_number
+           csvLine << d.district_tag
+        end
+
+        csv << csvLine
       end
-      exportArray << csvLine.to_csv
     end
     
     respond_to do |format|
-      format.csv { send_data exportArray.to_csv }
+      format.csv { send_data csvString }
     end
   end
 
