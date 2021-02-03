@@ -4,6 +4,6 @@
   <LI><%= link_to "Import All", import_all_path %></li>
   <LI><%= link_to "Edit Administrators", edit_admins_path %></LI>
   <LI><%= link_to "User Logs", admin_logs_path %></LI>
-  <LI><%= link_to "Export Students", admin_export_students_path %></LI>
+  <LI><%= link_to "Export Students", admin_export_students_path(format: "csv") %></LI>
   <LI><%= link_to "Export Devices", admin_export_devices_path(format: "csv") %></LI>
 <OL>
